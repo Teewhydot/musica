@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-const backgroundColor = Color(0xFF1e1e1e);
 
+
+const backgroundColor = Color(0xFF1e1e1e);
 const buttonPlayColor = Color(0xFFfacd66);
 const topClassWidgetColor = Color(0xFF1a1e1f);
 
@@ -12,7 +13,6 @@ Widget addVerticalSpacing (double height){
     height: height,
   );
 }
-
 
 Widget addHorizontalSpacing (double width){
   return SizedBox(
@@ -53,14 +53,11 @@ const smallBoldBlackTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-
 TextStyle smallBoldGreyTextStyle = TextStyle(
   color: textColor,
   fontSize: 12,
   fontWeight: FontWeight.bold,
 );
-
-
 
 const mediumWhiteTextStyle = TextStyle(
   color: Colors.white,

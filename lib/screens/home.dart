@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glassmorphism/glassmorphism.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/models/new_releases_model.dart';
 import 'package:musica/models/top_class_widget_model.dart';
@@ -7,7 +6,7 @@ import 'package:musica/reusables/constants.dart';
 import 'package:musica/reusables/widgets/glassmorphism.dart';
 import 'package:musica/reusables/widgets/top_class_widget.dart';
 import 'package:musica/reusables/widgets/new_releases_widget.dart';
-import 'package:musica/screens/drawer_screen.dart';
+import 'package:musica/screens/drawer/drawer_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
