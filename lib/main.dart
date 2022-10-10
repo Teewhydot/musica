@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musica/screens/drawer/drawer_all_screens/my_collection/collection_details_page.dart';
 
 import 'screens/home.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: CollectionDetailsPage(),
     );
   }
 }

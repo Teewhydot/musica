@@ -44,7 +44,7 @@ class MyCollectionsCard extends StatelessWidget {
               )),
           Positioned(
             top: 155,
-            right: 10,
+            right: 40,
             child: Image.asset(
               Assets.iconsMyCollectionsPlayIcon,
               height: 40,
