@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Seasons in', style: mediumWhiteTextStyle),
+                  const Text('Seasons in', style: mediumWhiteTextStyle),
                   Text('James', style: smallWhiteTextStyle.copyWith(color: textColor)),
                 ],
               ),
