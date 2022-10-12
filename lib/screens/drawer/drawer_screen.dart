@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/reusables/constants.dart';
@@ -27,7 +29,9 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'Home',
                     preSpacing: addHorizontalSpacing(5),
                     midSpacing: addHorizontalSpacing(10),
-                    ontap: () {},
+                    ontap: () {
+                      Navigator.pop(context);
+                    },
                   ),
                   addVerticalSpacing(30),
                   DrawerItem(

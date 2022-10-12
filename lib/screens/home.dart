@@ -1,60 +1,44 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
+import 'package:musica/measure.dart';
 import 'package:musica/models/new_releases_model.dart';
 import 'package:musica/models/top_class_widget_model.dart';
 import 'package:musica/reusables/constants.dart';
+import 'package:musica/reusables/widgets/glass_player_card.dart';
 import 'package:musica/reusables/widgets/glassmorphism.dart';
 import 'package:musica/reusables/widgets/top_class_widget.dart';
 import 'package:musica/reusables/widgets/new_releases_widget.dart';
 import 'package:musica/screens/drawer/drawer_screen.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  void getAlbum()async{
+    http.Response response  = await http.get(Uri.parse('https://api.deezer.com/album/302127'));
+    if(response.statusCode == 200){
+      var res = await jsonDecode(response.body);
+      var title = res['title'];
+      var fans = res['fans'];
+      var artistName = res['artist']['name'];
+      var coverImage = res['cover'];
+      print('{$title  $fans  $artistName  $coverImage  }');
+    } else {
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       drawer: const NavigationDrawer(),
       backgroundColor: backgroundColor,
-      bottomNavigationBar: GlassMorphicContainer(500.0, 100.0, Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              addHorizontalSpacing(10),
-              Column(
-                children: [
-                  addVerticalSpacing(15),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(Assets.imagesJames,height: 60,width: 60,),
-                  ),
-                ],
-              ),
-              addHorizontalSpacing(10),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Seasons in', style: mediumWhiteTextStyle),
-                  Text('James', style: smallWhiteTextStyle.copyWith(color: textColor)),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Icon(Icons.pause, color: textColor),
-              addHorizontalSpacing(10),
-             Image.asset(Assets.iconsPlaymusic),
-              addHorizontalSpacing(10),
-              Icon(Icons.skip_next, color: textColor),
-            ],
-          ),
-        ],
-      )),
+      bottomNavigationBar: const GlassPlayerCard(),
       appBar: AppBar(
         actions: [
           IconButton(

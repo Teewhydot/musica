@@ -6,8 +6,12 @@ import 'package:musica/reusables/constants.dart';
 
 class MyCollectionsCard extends StatelessWidget {
  final onTap;
+ final imageUrl;
+ final title;
+  final artistName;
+  final fans;
 
-  const MyCollectionsCard({super.key, required this.onTap});
+  const MyCollectionsCard({super.key, required this.onTap,required this.imageUrl,required this.title,required this.artistName,required this.fans});
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +26,40 @@ class MyCollectionsCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(20),
-              image: const DecorationImage(
-                image: AssetImage(Assets.imagesRectangle02),
+              image:  DecorationImage(
+                image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
+          ),
+          Container(
+            height: 234,
+            width: 360,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+
+                    Colors.transparent.withOpacity(0.7),
+                    Colors.transparent,
+                  ],
+                  // stops: const [0.1, 0.1],
+                )),
           ),
           Positioned(
               top: 130,
               left: 10,
               child: Text(
-                'Limits',
+                title,
                 style: smallWhiteTextStyle.copyWith(fontSize: 25),
               )),
           Positioned(
               top: 160,
               left: 10,
               child: Text(
-                'BTS',
+                artistName,
                 style: smallWhiteTextStyle.copyWith(color: textColor),
               )),
           Positioned(
@@ -52,11 +72,11 @@ class MyCollectionsCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          const Positioned(
+           Positioned(
             top: 190,
             left: 10,
             child: Text(
-              '2.3m Likes',
+              '$fans Likes',
               style: smallWhiteTextStyle,
             ),
           ),
