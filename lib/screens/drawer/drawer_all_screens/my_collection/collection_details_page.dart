@@ -37,11 +37,12 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   bool isPlaying = false;
   Duration position = const Duration(seconds: 0);
   Duration duration = const Duration(seconds: 0);
+  String currentPlayingMusicTitle = '';
+  String currentPlayingMusicArtist = '';
 
 
 
   Future getTrackList(String apiLink) async {
-
     try {
       http.Response response1 = await http.get(Uri.parse(widget.trackList));
       if (response1.statusCode == 200) {
@@ -74,41 +75,22 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
     });
   }
 
-  pauseMusic() async {
-    await audioPlayer.pause();
-    setState(() {
-      isPlaying = false;
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     trackListFuture = getTrackList(widget.trackList);
-    audioPlayer.onPlayerStateChanged.listen((event) {
-      setState(() {
-        isPlaying = event == PlayerState.playing;
-      });
-    });
-
-    audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
-    });
-
-    audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      bottomNavigationBar: const GlassPlayerCard(),
+      bottomNavigationBar:  GlassPlayerCard(
+        imageLink: widget.imageUrl,
+        currentPlayingMusicTitle: currentPlayingMusicTitle,
+        musicArtist: currentPlayingMusicArtist,
+      ),
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: const PreferredSize( preferredSize: Size.fromHeight(50), child: CustomAppBar()),
@@ -239,6 +221,10 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                                 trackLink: musicList[index].link,
                                 onPress: (){
                                     playMusic(musicList[index].link);
+                                    setState(() {
+                                      currentPlayingMusicArtist = musicList[index].artist;
+                                      currentPlayingMusicTitle = musicList[index].name;
+                                    });
                                 },
 
 
