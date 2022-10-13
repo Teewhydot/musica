@@ -11,23 +11,70 @@ import 'package:musica/reusables/widgets/glassmorphism.dart';
 import 'package:musica/reusables/widgets/music_card_widget.dart';
 import 'package:musica/reusables/widgets/my_collections_widget.dart';
 import 'package:http/http.dart' as http;
+import 'package:page_transition/page_transition.dart';
 
 class CollectionDetailsPage extends StatefulWidget {
-  const CollectionDetailsPage({Key? key}) : super(key: key);
+  final String imageUrl;
+  final String title;
+  final String artistName;
+  final int fans;
+  final String trackList;
+
+  const CollectionDetailsPage(
+      {Key? key,
+      required this.imageUrl,
+      required this.title,
+      required this.artistName,
+      required this.fans,
+      required this.trackList})
+      : super(key: key);
 
   @override
   State<CollectionDetailsPage> createState() => _CollectionDetailsPageState();
 }
 
 class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
-
+  List<Music> musicList = [];
+  late Future trackListFuture;
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Duration position = const Duration(seconds: 0);
   Duration duration = const Duration(seconds: 0);
 
+
+
+  Future getTrackList(String apiLink) async {
+    http.Response response1 = await http.get(Uri.parse(widget.trackList));
+    if (response1.statusCode == 200) {
+      print(' track api link status code is ${response1.statusCode}');
+      var res1 = await jsonDecode(response1.body);
+      var res2 = res1['data'];
+      print(res2);
+      for (var data in res2) {
+        var trackName = data['title'];
+        print(trackName);
+        var trackArtist =  data['artist']['name'];
+        print(trackArtist);
+        var duration =data['duration'];
+        print(duration);
+        var trackLink =  data['preview'];
+        print(trackLink);
+        final Music music = Music(
+          name: trackName,
+          artist: trackArtist,
+          duration: duration,
+          link: trackLink,
+        );
+        musicList.add(music);
+      }
+     print(musicList);
+    } else {
+    }
+  }
+
   playMusic() async {
-    await audioPlayer.play(UrlSource('https://developers.deezer.com/%22https://www.deezer.com/track/3135553/%22'));
+    await audioPlayer.play(UrlSource(
+        'https://developers.deezer.com/%22https://www.deezer.com/track/3135553/%22'));
     setState(() {
       isPlaying = true;
     });
@@ -39,9 +86,11 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
       isPlaying = false;
     });
   }
+
   @override
   void initState() {
     super.initState();
+    trackListFuture = getTrackList(widget.trackList);
     audioPlayer.onPlayerStateChanged.listen((event) {
       setState(() {
         isPlaying = event == PlayerState.playing;
@@ -63,92 +112,6 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Music> musicList = [
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-      Music(
-        name: 'Music Name',
-        artist: 'Artist Name',
-        image: Assets.imagesRectangle04,
-        duration: '3:00',
-      ),
-    ];
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar: const GlassPlayerCard(),
@@ -177,12 +140,12 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
         children: [
           Stack(clipBehavior: Clip.none, children: <Widget>[
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.transparent,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    Assets.imagesSampleCollection,
+                  image: NetworkImage(
+                    widget.imageUrl,
                   ),
                 ),
               ),
@@ -215,20 +178,31 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                     },
                     child: Column(
                       children: [
-                        // Center(child: MyCollectionsCard(onTap: () {})),
-                        const Padding(
+                        Container(
+                          height: 234,
+                          width: 360,
+                          decoration: BoxDecoration(
+                            color: backgroundColor,
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: NetworkImage(widget.imageUrl),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Padding(
                           padding: EdgeInsets.only(left: 50),
                           child: Text(
-                            'Tomorrows Tune\'s',
+                            widget.title,
                             style: TextStyle(
                                 color: Color(0xffa4c7c6), fontSize: 25),
                           ),
                         ),
                         addVerticalSpacing(10),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(left: 50),
                           child: Text(
-                            'Lorem ipsum dolor sit amet\nConsecrate disciplining elite ut aliquam,\nPurus sit amet luctus venenatis',
+                            widget.artistName,
                             style: TextStyle(
                                 color: Color(0xffa4c7c6), fontSize: 15),
                           ),
@@ -262,20 +236,44 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                     ),
                   ),
                   SizedBox(
-                    height: height - 550,
-                    child: ListView.builder(
-                      physics: const ScrollPhysics(),
-                      itemCount: musicList.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return MusicCardWidget(
-                            name: musicList[index].name,
-                            artist: musicList[index].artist,
-                            image: musicList[index].image,
-                            duration: musicList[index].duration);
-                      },
-                    ),
-                  ),
+                    height: height-550,
+                    child: FutureBuilder(
+                        future:trackListFuture,
+                        initialData: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              backgroundColor: Colors.white,
+                            )),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            print(snapshot.error);
+                            return const Center(
+                                child: Text(
+                                  'Something went wrong',
+                                  style: mediumWhiteTextStyle,
+                                ));
+                          }
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: textColor,
+                              ),
+                            );
+                          }
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const ScrollPhysics(),
+                            itemCount: musicList.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return MusicCardWidget(
+                                  name: musicList[index].name,
+                                  artist: musicList[index].artist,
+                                  duration: musicList[index].duration);
+                            },
+                          );
+                        }),
+                  )
                 ],
               ),
             )

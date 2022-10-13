@@ -4,10 +4,9 @@ import 'package:musica/reusables/constants.dart';
 class MusicCardWidget extends StatelessWidget {
   final String name;
   final String artist;
-  final String image;
-  final String duration;
+  final int duration;
 
-  const MusicCardWidget({super.key, required this.name, required this.artist, required this.image, required this.duration});
+  const MusicCardWidget({super.key, required this.name, required this.artist,required this.duration});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +26,10 @@ class MusicCardWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.asset(image,height: 39,width: 39,),
+                // Image.asset(Asset,height: 39,width: 39,),
                 addHorizontalSpacing(10),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     addVerticalSpacing(10),
                     Text(
@@ -59,7 +59,7 @@ class MusicCardWidget extends StatelessWidget {
                     size: 30,
                   ),
                 ),
-                 Text(duration),
+                 Text(duration.toString()),
               ],
             ),
 

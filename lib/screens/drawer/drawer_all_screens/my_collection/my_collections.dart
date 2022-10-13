@@ -42,7 +42,10 @@ class _MyCollectionsState extends State<MyCollections> {
       var fans1 = res1['fans'];
       var artistName1 = res1['artist']['name'];
       var coverImage1 = res1['cover'];
+      var trackList1 = res1['tracklist'];
+
       final Album album1 = Album(
+        trackList: trackList1,
           title: title1,
           fans: fans1,
           artistName: artistName1,
@@ -51,7 +54,11 @@ class _MyCollectionsState extends State<MyCollections> {
       var fans2 = res2['fans'];
       var artistName2 = res2['artist']['name'];
       var coverImage2 = res2['cover'];
+      var trackList2 = res2['tracklist'];
+      print(trackList1);
+      print(trackList2);
       final Album album2 = Album(
+        trackList: trackList2,
           title: title2,
           fans: fans2,
           artistName: artistName2,
@@ -60,7 +67,9 @@ class _MyCollectionsState extends State<MyCollections> {
       var fans3 = res3['fans'];
       var artistName3 = res3['artist']['name'];
       var coverImage3 = res3['cover'];
+      var trackList3 = res3['tracklist'];
       final Album album3 = Album(
+        trackList: trackList3,
           title: title3,
           fans: fans3,
           artistName: artistName3,
@@ -69,7 +78,9 @@ class _MyCollectionsState extends State<MyCollections> {
       var fans4 = res4['fans'];
       var artistName4 = res4['artist']['name'];
       var coverImage4 = res4['cover'];
+      var trackList4 = res4['tracklist'];
       final Album album4 = Album(
+        trackList: trackList4,
           title: title4,
           fans: fans4,
           artistName: artistName4,
@@ -179,18 +190,26 @@ class _MyCollectionsState extends State<MyCollections> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: albumList.length,
                       itemBuilder: (context, index) {
-                        return MyCollectionsCard(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: const CollectionDetailsPage(),
-                                    type: PageTransitionType.rightToLeft));
-                          },
-                          imageUrl: albumList[index].imageUrl,
-                          title: albumList[index].title,
-                          artistName: albumList[index].artistName,
-                          fans: albumList[index].fans,
+                        return Center(
+                          child: MyCollectionsCard(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: CollectionDetailsPage(
+                                      title: albumList[index].title,
+                                      artistName: albumList[index].artistName,
+                                      fans: albumList[index].fans,
+                                      imageUrl: albumList[index].imageUrl,
+                                      trackList: albumList[index].trackList,
+                                      ),
+                                      type: PageTransitionType.rightToLeft));
+                            },
+                            imageUrl: albumList[index].imageUrl,
+                            title: albumList[index].title,
+                            artistName: albumList[index].artistName,
+                            fans: albumList[index].fans,
+                          ),
                         );
                       },
                     );
