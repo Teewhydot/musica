@@ -67,9 +67,8 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
 
   }
 
-  playMusic() async {
-    await audioPlayer.play(UrlSource(
-        'https://developers.deezer.com/%22https://www.deezer.com/track/3135553/%22'));
+  playMusic(String trackLink) async {
+    await audioPlayer.play(UrlSource(trackLink));
     setState(() {
       isPlaying = true;
     });
@@ -236,7 +235,14 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                               return MusicCardWidget(
                                   name: musicList[index].name,
                                   artist: musicList[index].artist,
-                                  duration: musicList[index].duration);
+                                duration: musicList[index].duration,
+                                trackLink: musicList[index].link,
+                                onPress: (){
+                                    playMusic(musicList[index].link);
+                                },
+
+
+                              );
                             },
                           );
                         }),
