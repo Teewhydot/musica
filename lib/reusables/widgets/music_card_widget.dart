@@ -13,7 +13,7 @@ class MusicCardWidget extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     const height = 70.0;
     return Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+      padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
       child: Container(
         width: width,
         height: height,
@@ -24,30 +24,36 @@ class MusicCardWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                // Image.asset(Asset,height: 39,width: 39,),
-                addHorizontalSpacing(10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    addVerticalSpacing(10),
-                    Text(
-                      name,
-                      style:mediumWhiteTextStyle.copyWith(fontSize: 20),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            name,
+                            softWrap: false,
+                            style:mediumWhiteTextStyle.copyWith(fontSize: 20),
+                          ),
+                        ),
+                        addVerticalSpacing(5),
+                        Expanded(
+                          child: Text(
+                            artist,
+                            style: TextStyle(
+                              color: textColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    addVerticalSpacing(5),
-                    Text(
-                      artist,
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             Column(
               children: [

@@ -41,25 +41,30 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
 
 
   Future getTrackList(String apiLink) async {
-    http.Response response1 = await http.get(Uri.parse(widget.trackList));
-    if (response1.statusCode == 200) {
-      var res1 = await jsonDecode(response1.body);
-      var res2 = res1['data'];
-      for (var data in res2) {
-        var trackName = data['title'];
-        var trackArtist =  data['artist']['name'];
-        var duration =data['duration'];
-        var trackLink =  data['preview'];
-        final Music music = Music(
-          name: trackName,
-          artist: trackArtist,
-          duration: duration,
-          link: trackLink,
-        );
-        musicList.add(music);
-      }
-    } else {
+
+    try {
+      http.Response response1 = await http.get(Uri.parse(widget.trackList));
+      if (response1.statusCode == 200) {
+        var res1 = await jsonDecode(response1.body);
+        var res2 = res1['data'];
+        for (var data in res2) {
+          var trackName = data['title'];
+          var trackArtist = data['artist']['name'];
+          var duration = data['duration'];
+          var trackLink = data['preview'];
+          final Music music = Music(
+            name: trackName,
+            artist: trackArtist,
+            duration: duration,
+            link: trackLink,
+          );
+          musicList.add(music);
+        }
+      } else {}
+    } catch(e){
+
     }
+
   }
 
   playMusic() async {
@@ -155,7 +160,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 50),
+                        padding: const EdgeInsets.only(left: 20),
                         child: Text(
                           widget.title,
                           style: const TextStyle(
@@ -164,7 +169,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                       ),
                       addVerticalSpacing(10),
                       Padding(
-                        padding: const EdgeInsets.only(left: 50),
+                        padding: const EdgeInsets.only(left: 20),
                         child: Text(
                           widget.artistName,
                           style: const TextStyle(
