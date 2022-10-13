@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/models/album_model.dart';
 import 'package:musica/reusables/constants.dart';
+import 'package:musica/reusables/widgets/custom_app_bar.dart';
 import 'package:musica/reusables/widgets/my_collections_widget.dart';
 import 'package:musica/screens/drawer/drawer_all_screens/my_collection/collection_details_page.dart';
 import 'package:page_transition/page_transition.dart';
@@ -107,25 +108,7 @@ class _MyCollectionsState extends State<MyCollections> {
     final Color inactiveColor = textColor;
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.search,
-              color: textColor,
-              size: 30,
-            ),
-          ),
-        ],
-        elevation: 0,
-        backgroundColor: backgroundColor,
-        title: Image.asset(
-          Assets.iconsMusicicon,
-          height: 25,
-          width: 25,
-        ),
-      ),
+      appBar:const PreferredSize( preferredSize: Size.fromHeight(50), child: CustomAppBar()),
       body: ListView(
         children: [
           addVerticalSpacing(20),
@@ -180,8 +163,13 @@ class _MyCollectionsState extends State<MyCollections> {
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
-                        child: CircularProgressIndicator(
-                          color: textColor,
+                        child: Column(
+                          children: [
+                            addVerticalSpacing(200),
+                            CircularProgressIndicator(
+                              color: textColor,
+                            ),
+                          ],
                         ),
                       );
                     }

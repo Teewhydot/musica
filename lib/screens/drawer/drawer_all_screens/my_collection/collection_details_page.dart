@@ -3,15 +3,12 @@ import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/measure.dart';
 import 'package:musica/models/music_model.dart';
 import 'package:musica/reusables/constants.dart';
+import 'package:musica/reusables/widgets/custom_app_bar.dart';
 import 'package:musica/reusables/widgets/glass_player_card.dart';
-import 'package:musica/reusables/widgets/glassmorphism.dart';
 import 'package:musica/reusables/widgets/music_card_widget.dart';
-import 'package:musica/reusables/widgets/my_collections_widget.dart';
 import 'package:http/http.dart' as http;
-import 'package:page_transition/page_transition.dart';
 
 class CollectionDetailsPage extends StatefulWidget {
   final String imageUrl;
@@ -46,19 +43,13 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   Future getTrackList(String apiLink) async {
     http.Response response1 = await http.get(Uri.parse(widget.trackList));
     if (response1.statusCode == 200) {
-      print(' track api link status code is ${response1.statusCode}');
       var res1 = await jsonDecode(response1.body);
       var res2 = res1['data'];
-      print(res2);
       for (var data in res2) {
         var trackName = data['title'];
-        print(trackName);
         var trackArtist =  data['artist']['name'];
-        print(trackArtist);
         var duration =data['duration'];
-        print(duration);
         var trackLink =  data['preview'];
-        print(trackLink);
         final Music music = Music(
           name: trackName,
           artist: trackArtist,
@@ -67,7 +58,6 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
         );
         musicList.add(music);
       }
-     print(musicList);
     } else {
     }
   }
@@ -117,25 +107,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
       bottomNavigationBar: const GlassPlayerCard(),
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.search,
-              color: textColor,
-              size: 30,
-            ),
-          ),
-        ],
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Image.asset(
-          Assets.iconsMusicicon,
-          height: 25,
-          width: 25,
-        ),
-      ),
+      appBar: const PreferredSize( preferredSize: Size.fromHeight(50), child: CustomAppBar()),
       body: Column(
         children: [
           Stack(clipBehavior: Clip.none, children: <Widget>[
@@ -168,75 +140,66 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  MeasureSize(
-                    onChange: (size) {
-                      var myChildSize = Size.zero;
-                      setState(() {
-                        myChildSize = size;
-                      });
-                      print(myChildSize);
-                    },
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 234,
-                          width: 360,
-                          decoration: BoxDecoration(
-                            color: backgroundColor,
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              image: NetworkImage(widget.imageUrl),
-                              fit: BoxFit.cover,
-                            ),
+                  Column(
+                    children: [
+                      Container(
+                        height: 234,
+                        width: 360,
+                        decoration: BoxDecoration(
+                          color: backgroundColor,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: NetworkImage(widget.imageUrl),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 50),
-                          child: Text(
-                            widget.title,
-                            style: TextStyle(
-                                color: Color(0xffa4c7c6), fontSize: 25),
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50),
+                        child: Text(
+                          widget.title,
+                          style: const TextStyle(
+                              color: Color(0xffa4c7c6), fontSize: 25),
                         ),
-                        addVerticalSpacing(10),
-                        Padding(
-                          padding: EdgeInsets.only(left: 50),
-                          child: Text(
-                            widget.artistName,
-                            style: TextStyle(
-                                color: Color(0xffa4c7c6), fontSize: 15),
-                          ),
+                      ),
+                      addVerticalSpacing(10),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50),
+                        child: Text(
+                          widget.artistName,
+                          style: const TextStyle(
+                              color: Color(0xffa4c7c6), fontSize: 15),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Expanded(
-                                  child: Image.asset(
-                                Assets.iconsPlayAllIcon,
-                                height: 36,
-                              )),
-                              addHorizontalSpacing(5),
-                              Expanded(
-                                  child: Image.asset(
-                                Assets.iconsAddToCollecIcon,
-                                height: 36,
-                              )),
-                              addHorizontalSpacing(5),
-                              Expanded(
-                                  child: Image.asset(
-                                Assets.iconsLikeIcon,
-                                height: 36,
-                              )),
-                            ],
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                                child: Image.asset(
+                              Assets.iconsPlayAllIcon,
+                              height: 36,
+                            )),
+                            addHorizontalSpacing(5),
+                            Expanded(
+                                child: Image.asset(
+                              Assets.iconsAddToCollecIcon,
+                              height: 36,
+                            )),
+                            addHorizontalSpacing(5),
+                            Expanded(
+                                child: Image.asset(
+                              Assets.iconsLikeIcon,
+                              height: 36,
+                            )),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: height-550,
+                    height: height-510,
                     child: FutureBuilder(
                         future:trackListFuture,
                         initialData: const Center(
@@ -246,7 +209,6 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                             )),
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
-                            print(snapshot.error);
                             return const Center(
                                 child: Text(
                                   'Something went wrong',
