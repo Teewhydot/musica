@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/models/new_releases_model.dart';
 import 'package:musica/models/top_class_widget_model.dart';
@@ -9,6 +10,11 @@ import 'package:musica/reusables/widgets/large_home_card.dart';
 import 'package:musica/reusables/widgets/top_class_widget.dart';
 import 'package:musica/reusables/widgets/new_releases_widget.dart';
 import 'package:musica/screens/drawer/drawer_screen.dart';
+
+
+final numProvider = StateProvider.autoDispose<int>((ref) {
+  return  0;
+});
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -91,7 +97,8 @@ class HomeBody extends StatelessWidget {
     return ListView(
       children: [
         addVerticalSpacing(20),
-        const LargeHomeCardWidget(),
+        GestureDetector(onTap: (){
+        }, child: const LargeHomeCardWidget()),
         addVerticalSpacing(20),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -124,6 +131,15 @@ class HomeBody extends StatelessWidget {
         ),
         ReleasesWidget(newReleasesModelList: newReleasesModelList),
         addVerticalSpacing(100),
+        Consumer(
+          builder: (context, ref, child) {
+            final number = ref.watch(numProvider).toString();
+            return Text(number,style: mediumWhiteTextStyle,);
+          },
+        ),
+        addVerticalSpacing(20),
+        ElevatedButton(onPressed: (){
+        }, child: null)
       ],
     );
   }

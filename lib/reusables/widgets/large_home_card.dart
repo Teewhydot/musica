@@ -29,7 +29,7 @@ class LargeHomeCardWidget extends StatelessWidget {
               addVerticalSpacing(20),
               const Text(
                 'Curated Playlist',
-                style: smallWhiteTextStyle,
+                style: mediumWhiteTextStyle,
               ),
               addVerticalSpacing(236),
               const Text(
@@ -122,7 +122,7 @@ class LargeHomeCardWidget extends StatelessWidget {
                   Text(
                     '33k Likes',
                     style: smallWhiteTextStyle.copyWith(
-                      fontSize: 24,
+                      fontSize: 23,
                     ),
                   ),
                 ],

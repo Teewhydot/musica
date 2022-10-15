@@ -39,6 +39,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   Duration duration = const Duration(seconds: 0);
   String currentPlayingMusicTitle = '';
   String currentPlayingMusicArtist = '';
+  String currentTrackLink = '';
 
 
 
@@ -75,11 +76,33 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
     });
   }
 
-
+  pauseMusic() async {
+    await audioPlayer.pause();
+    setState(() {
+      isPlaying = false;
+    });
+  }
   @override
   void initState() {
     super.initState();
     trackListFuture = getTrackList(widget.trackList);
+    audioPlayer.onPlayerStateChanged.listen((event) {
+      setState(() {
+        isPlaying = event == PlayerState.playing;
+      });
+    });
+
+    audioPlayer.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    audioPlayer.onPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
   }
 
   @override
@@ -87,6 +110,9 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar:  GlassPlayerCard(
+        pauseMusicFunction: pauseMusic(),
+        playMusicFunction: playMusic(currentTrackLink
+        ),
         imageLink: widget.imageUrl,
         currentPlayingMusicTitle: currentPlayingMusicTitle,
         musicArtist: currentPlayingMusicArtist,
@@ -224,6 +250,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                                     setState(() {
                                       currentPlayingMusicArtist = musicList[index].artist;
                                       currentPlayingMusicTitle = musicList[index].name;
+                                      currentTrackLink = musicList[index].link;
                                     });
                                 },
 

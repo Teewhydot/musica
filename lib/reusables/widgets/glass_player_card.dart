@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
@@ -8,11 +10,15 @@ class GlassPlayerCard extends StatefulWidget {
   final String currentPlayingMusicTitle;
   final String musicArtist;
   final String imageLink;
+  final pauseMusicFunction;
+  final playMusicFunction;
 
   const GlassPlayerCard(
       {super.key,
       required this.currentPlayingMusicTitle,
       required this.musicArtist,
+      required this.pauseMusicFunction,
+      required this.playMusicFunction,
       required this.imageLink});
 
   @override
@@ -24,12 +30,7 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
   bool isPlaying = true;
   Duration position = const Duration(seconds: 0);
   Duration duration = const Duration(seconds: 0);
-  pauseMusic() async {
-    await audioPlayer.pause();
-    setState(() {
-      isPlaying = false;
-    });
-  }
+
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
     audioPlayer.onPlayerStateChanged.listen((event) {
       setState(() {
         isPlaying = event == PlayerState.playing;
+        print(isPlaying);
       });
     });
 
@@ -71,7 +73,11 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
                       addVerticalSpacing(15),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: textColor,width: 2)
+                          ),
                           height: 60,
                           width: 60,
                           child: Image.network(
@@ -103,13 +109,16 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
-                    onTap: () async{
-                      pauseMusic();
-                    },
+                    onTap:() {
+
+                      widget.pauseMusicFunction;
+                      },
                     child: Icon(Icons.pause, color: textColor)),
                 addHorizontalSpacing(10),
                 GestureDetector(
-                    onTap: () async {},
+                    onTap: (){
+
+                      widget.playMusicFunction;},
                     child: Image.asset(Assets.iconsPlaymusic)),
                 addHorizontalSpacing(10),
                 Icon(Icons.skip_next, color: textColor),
