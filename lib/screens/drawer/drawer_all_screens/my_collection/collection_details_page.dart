@@ -1,14 +1,13 @@
-import 'dart:convert';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:musica/functions/api_functions.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/models/music_model.dart';
+import 'package:musica/models/riverpod_file.dart';
 import 'package:musica/reusables/constants.dart';
 import 'package:musica/reusables/widgets/custom_app_bar.dart';
 import 'package:musica/reusables/widgets/glass_player_card.dart';
 import 'package:musica/reusables/widgets/music_card_widget.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class CollectionDetailsPage extends StatefulWidget {
   final String imageUrl;
@@ -31,7 +30,7 @@ class CollectionDetailsPage extends StatefulWidget {
 }
 
 class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
-  List<Music> musicList = [];
+  ApiFunctions apiFunctions = ApiFunctions();
   late Future trackListFuture;
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
@@ -41,51 +40,10 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   String currentPlayingMusicArtist = '';
   String currentTrackLink = '';
 
-
-
-  Future getTrackList(String apiLink) async {
-    try {
-      http.Response response1 = await http.get(Uri.parse(widget.trackList));
-      if (response1.statusCode == 200) {
-        var res1 = await jsonDecode(response1.body);
-        var res2 = res1['data'];
-        for (var data in res2) {
-          var trackName = data['title'];
-          var trackArtist = data['artist']['name'];
-          var duration = data['duration'];
-          var trackLink = data['preview'];
-          final Music music = Music(
-            name: trackName,
-            artist: trackArtist,
-            duration: duration,
-            link: trackLink,
-          );
-          musicList.add(music);
-        }
-      } else {}
-    } catch(e){
-
-    }
-
-  }
-
-  playMusic(String trackLink) async {
-    await audioPlayer.play(UrlSource(trackLink));
-    setState(() {
-      isPlaying = true;
-    });
-  }
-
-  pauseMusic() async {
-    await audioPlayer.pause();
-    setState(() {
-      isPlaying = false;
-    });
-  }
   @override
   void initState() {
     super.initState();
-    trackListFuture = getTrackList(widget.trackList);
+    trackListFuture = apiFunctions.getTrackList(widget.trackList);
     audioPlayer.onPlayerStateChanged.listen((event) {
       setState(() {
         isPlaying = event == PlayerState.playing;
@@ -107,19 +65,19 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final musicProvider =
+        Provider.of<MusicPlayerProvider>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      bottomNavigationBar:  GlassPlayerCard(
-        pauseMusicFunction: pauseMusic(),
-        playMusicFunction: playMusic(currentTrackLink
-        ),
+      bottomNavigationBar: GlassPlayerCard(
         imageLink: widget.imageUrl,
         currentPlayingMusicTitle: currentPlayingMusicTitle,
         musicArtist: currentPlayingMusicArtist,
       ),
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: const PreferredSize( preferredSize: Size.fromHeight(50), child: CustomAppBar()),
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50), child: CustomAppBar()),
       body: Column(
         children: [
           Stack(clipBehavior: Clip.none, children: <Widget>[
@@ -211,23 +169,24 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                     ],
                   ),
                   SizedBox(
-                    height: height-510,
+                    height: height - 510,
                     child: FutureBuilder(
-                        future:trackListFuture,
+                        future: trackListFuture,
                         initialData: const Center(
                             child: CircularProgressIndicator(
-                              color: Colors.white,
-                              backgroundColor: Colors.white,
-                            )),
+                          color: Colors.white,
+                          backgroundColor: Colors.white,
+                        )),
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
                             return const Center(
                                 child: Text(
-                                  'Something went wrong',
-                                  style: mediumWhiteTextStyle,
-                                ));
+                              'Something went wrong',
+                              style: mediumWhiteTextStyle,
+                            ));
                           }
-                          if (snapshot.connectionState == ConnectionState.waiting) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return Center(
                               child: CircularProgressIndicator(
                                 color: textColor,
@@ -237,24 +196,27 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                           return ListView.builder(
                             shrinkWrap: true,
                             physics: const ScrollPhysics(),
-                            itemCount: musicList.length,
+                            itemCount: apiFunctions.musicList.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
                               return MusicCardWidget(
-                                  name: musicList[index].name,
-                                  artist: musicList[index].artist,
-                                duration: musicList[index].duration,
-                                trackLink: musicList[index].link,
-                                onPress: (){
-                                    playMusic(musicList[index].link);
-                                    setState(() {
-                                      currentPlayingMusicArtist = musicList[index].artist;
-                                      currentPlayingMusicTitle = musicList[index].name;
-                                      currentTrackLink = musicList[index].link;
-                                    });
+                                name: apiFunctions.musicList[index].name,
+                                artist: apiFunctions.musicList[index].artist,
+                                duration:
+                                    apiFunctions.musicList[index].duration,
+                                trackLink: apiFunctions.musicList[index].link,
+                                onPress: () {
+                                  musicProvider.playMusic(
+                                      apiFunctions.musicList[index].link);
+                                  setState(() {
+                                    currentPlayingMusicArtist =
+                                        apiFunctions.musicList[index].artist;
+                                    currentPlayingMusicTitle =
+                                        apiFunctions.musicList[index].name;
+                                    currentTrackLink =
+                                        apiFunctions.musicList[index].link;
+                                  });
                                 },
-
-
                               );
                             },
                           );

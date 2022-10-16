@@ -1,62 +1,26 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
+import 'package:musica/models/riverpod_file.dart';
 import 'package:musica/reusables/constants.dart';
 import 'package:musica/reusables/widgets/glassmorphism.dart';
+import 'package:provider/provider.dart';
 
-class GlassPlayerCard extends StatefulWidget {
+class GlassPlayerCard extends StatelessWidget {
   final String currentPlayingMusicTitle;
   final String musicArtist;
   final String imageLink;
-  final pauseMusicFunction;
-  final playMusicFunction;
 
   const GlassPlayerCard(
       {super.key,
       required this.currentPlayingMusicTitle,
       required this.musicArtist,
-      required this.pauseMusicFunction,
-      required this.playMusicFunction,
       required this.imageLink});
 
   @override
-  State<GlassPlayerCard> createState() => _GlassPlayerCardState();
-}
-
-class _GlassPlayerCardState extends State<GlassPlayerCard> {
-  final audioPlayer = AudioPlayer();
-  bool isPlaying = true;
-  Duration position = const Duration(seconds: 0);
-  Duration duration = const Duration(seconds: 0);
-
-
-  @override
-  void initState() {
-    super.initState();
-    audioPlayer.onPlayerStateChanged.listen((event) {
-      setState(() {
-        isPlaying = event == PlayerState.playing;
-        print(isPlaying);
-      });
-    });
-
-    audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
-    });
-
-    audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final musicPlayerProvider = Provider.of<MusicPlayerProvider>(context);
     return GlassMorphicContainer(
         500.0,
         100.0,
@@ -81,7 +45,7 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
                           height: 60,
                           width: 60,
                           child: Image.network(
-                            widget.imageLink,
+                            imageLink,
                           ),
                         ),
                       ),
@@ -93,10 +57,10 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         addVerticalSpacing(10),
-                        Text(widget.currentPlayingMusicTitle,
+                        Text(currentPlayingMusicTitle,
                             overflow: TextOverflow.ellipsis,
                             style: mediumWhiteTextStyle),
-                        Text(widget.musicArtist,
+                        Text(musicArtist,
                             style: smallWhiteTextStyle.copyWith(
                                 color: textColor)),
                       ],
@@ -110,15 +74,14 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
               children: [
                 GestureDetector(
                     onTap:() {
-
-                      widget.pauseMusicFunction;
+                      musicPlayerProvider.pauseMusic();
                       },
                     child: Icon(Icons.pause, color: textColor)),
                 addHorizontalSpacing(10),
                 GestureDetector(
                     onTap: (){
-
-                      widget.playMusicFunction;},
+                 musicPlayerProvider.resumeMusic();
+                      },
                     child: Image.asset(Assets.iconsPlaymusic)),
                 addHorizontalSpacing(10),
                 Icon(Icons.skip_next, color: textColor),

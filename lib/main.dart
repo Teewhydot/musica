@@ -1,10 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:flutter/material.dart';
+import 'package:musica/models/riverpod_file.dart';
+import 'package:provider/provider.dart';
 import 'screens/home.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(MultiProvider(
+    builder: (context, _) {
+      return const MyApp();
+    },
+    providers: [
+      ChangeNotifierProvider(create: (context) => MusicPlayerProvider()),
+    ],
+  ));
 }
 
 class MyApp extends StatelessWidget {
