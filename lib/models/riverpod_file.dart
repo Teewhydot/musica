@@ -31,7 +31,6 @@ class MusicPlayerProvider extends ChangeNotifier{
     notifyListeners();
   }
   void pauseMusic()async{
-
     await audioPlayer.pause();
     isPlaying = false;
     notifyListeners();
