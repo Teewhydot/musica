@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
-import 'package:musica/functions/api_functions.dart';
+import 'package:musica/models/riverpod_file.dart';
 import 'package:musica/reusables/constants.dart';
 import 'package:musica/reusables/widgets/custom_app_bar.dart';
 import 'package:musica/reusables/widgets/my_collections_widget.dart';
@@ -16,12 +16,12 @@ class MyCollections extends StatefulWidget {
 
 class _MyCollectionsState extends State<MyCollections> {
   late Future albumFuture;
-  ApiFunctions apiFunctions = ApiFunctions();
+  MusicPlayerProvider musicPlayerProvider = MusicPlayerProvider();
 
   @override
   void initState() {
     super.initState();
-    albumFuture = apiFunctions.getPlayList();
+    albumFuture = musicPlayerProvider.getPlayList();
   }
 
   List<bool> isActive = [true, false];
@@ -99,7 +99,7 @@ class _MyCollectionsState extends State<MyCollections> {
                     return ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount:apiFunctions.albumListX.length,
+                      itemCount:musicPlayerProvider.albumListX.length,
                       itemBuilder: (context, index) {
                         return Center(
                           child: MyCollectionsCard(
@@ -108,18 +108,18 @@ class _MyCollectionsState extends State<MyCollections> {
                                   context,
                                   PageTransition(
                                       child: CollectionDetailsPage(
-                                      title: apiFunctions.albumListX[index].title,
-                                      artistName: apiFunctions.albumListX[index].artistName,
-                                      fans: apiFunctions.albumListX[index].fans,
-                                      imageUrl: apiFunctions.albumListX[index].imageUrl,
-                                      trackList:apiFunctions.albumListX[index].trackList,
+                                      title: musicPlayerProvider.albumListX[index].title,
+                                      artistName: musicPlayerProvider.albumListX[index].artistName,
+                                      fans: musicPlayerProvider.albumListX[index].fans,
+                                      imageUrl: musicPlayerProvider.albumListX[index].imageUrl,
+                                      trackList:musicPlayerProvider.albumListX[index].trackList,
                                       ),
                                       type: PageTransitionType.rightToLeft));
                             },
-                            imageUrl: apiFunctions.albumListX[index].imageUrl,
-                            title: apiFunctions.albumListX[index].title,
-                            artistName: apiFunctions.albumListX[index].artistName,
-                            fans: apiFunctions.albumListX[index].fans,
+                            imageUrl: musicPlayerProvider.albumListX[index].imageUrl,
+                            title: musicPlayerProvider.albumListX[index].title,
+                            artistName: musicPlayerProvider.albumListX[index].artistName,
+                            fans: musicPlayerProvider.albumListX[index].fans,
                           ),
                         );
                       },

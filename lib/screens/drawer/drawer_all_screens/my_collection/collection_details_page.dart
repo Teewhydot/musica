@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:musica/functions/api_functions.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/models/riverpod_file.dart';
 import 'package:musica/reusables/constants.dart';
@@ -30,7 +29,7 @@ class CollectionDetailsPage extends StatefulWidget {
 }
 
 class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
-  ApiFunctions apiFunctions = ApiFunctions();
+  MusicPlayerProvider musicPlayerProvider = MusicPlayerProvider();
   late Future trackListFuture;
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
@@ -43,7 +42,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   @override
   void initState() {
     super.initState();
-    trackListFuture = apiFunctions.getTrackList(widget.trackList);
+    trackListFuture = musicPlayerProvider.getTrackList(widget.trackList);
     audioPlayer.onPlayerStateChanged.listen((event) {
       setState(() {
         isPlaying = event == PlayerState.playing;
@@ -196,25 +195,25 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                           return ListView.builder(
                             shrinkWrap: true,
                             physics: const ScrollPhysics(),
-                            itemCount: apiFunctions.musicList.length,
+                            itemCount: musicPlayerProvider.musicList.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
                               return MusicCardWidget(
-                                name: apiFunctions.musicList[index].name,
-                                artist: apiFunctions.musicList[index].artist,
+                                name: musicPlayerProvider.musicList[index].name,
+                                artist: musicPlayerProvider.musicList[index].artist,
                                 duration:
-                                    apiFunctions.musicList[index].duration,
-                                trackLink: apiFunctions.musicList[index].link,
+                                    musicPlayerProvider.musicList[index].duration,
+                                trackLink: musicPlayerProvider.musicList[index].link,
                                 onPress: () {
                                   musicProvider.playMusic(
-                                      apiFunctions.musicList[index].link);
+                                      musicPlayerProvider.musicList[index].link);
                                   setState(() {
                                     currentPlayingMusicArtist =
-                                        apiFunctions.musicList[index].artist;
+                                        musicPlayerProvider.musicList[index].artist;
                                     currentPlayingMusicTitle =
-                                        apiFunctions.musicList[index].name;
+                                        musicPlayerProvider.musicList[index].name;
                                     currentTrackLink =
-                                        apiFunctions.musicList[index].link;
+                                        musicPlayerProvider.musicList[index].link;
                                   });
                                 },
                               );
