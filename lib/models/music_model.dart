@@ -3,13 +3,15 @@ class Music {
   final String artist;
   final int duration;
   final String link;
-  final int? trackPosition;
+  final bool isPlaying;
+  final int noOfTracks;
 
   Music({
     required this.name,
     required this.artist,
     required this.duration,
     required this.link,
-    required this.trackPosition,
+    required this.isPlaying,
+    required this.noOfTracks,
   });
 }

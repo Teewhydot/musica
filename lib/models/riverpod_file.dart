@@ -29,19 +29,19 @@ class MusicPlayerProvider extends ChangeNotifier{
           var trackArtist = data['artist']['name'];
           var duration = data['duration'];
           var trackLink = data['preview'];
-          var trackPosition  = data['track_position'];
+          var noOfTracks = res1['total'];
           final Music music = Music(
             name: trackName,
             artist: trackArtist,
             duration: duration,
             link: trackLink,
-            trackPosition: trackPosition,
+            isPlaying: false,
+            noOfTracks: noOfTracks,
           );
-          print(trackPosition);
-          print(duration);
           musicList.add(music);
-
+          print(noOfTracks);
         }
+
       } else {}
     } catch(e){
       print(e);
