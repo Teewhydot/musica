@@ -1,4 +1,3 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:musica/models/album_model.dart';
@@ -54,9 +53,9 @@ class MusicPlayerProvider extends ChangeNotifier{
     try {
       http.Response response1 = await http.get(Uri.parse('https://api.deezer.com/user/2529/playlists'));
       if (response1.statusCode == 200) {
-        var res1 = await jsonDecode(response1.body);
-        var res2 = res1['data'];
-        for (var data in res2) {
+        var response = await jsonDecode(response1.body);
+        var listOfPlayLists = response['data'];
+        for (var data in listOfPlayLists) {
           var playListName = data['title'];
           var creator = data['creator']['name'];
           var noOfFans = data['id'];
