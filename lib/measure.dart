@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 typedef OnWidgetSizeChange = void Function(Size size);
 
 class MeasureSizeRenderObject extends RenderProxyBox {
@@ -54,10 +53,10 @@ class _FunctiontoMeasureAnyWidgetState
     MeasureSize(
       child: Container(),
       onChange: (size) {
-        var myChildSize = Size.zero;
-        setState(() {
-          myChildSize = size;
-        });
+        // Size myChildSize = Size.zero;
+        // setState(() {
+        //   myChildSize = size;
+        // });
       },
     );
     return Container();

@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
-import 'package:musica/models/riverpod_file.dart';
-import 'package:musica/reusables/constants.dart';
-import 'package:musica/reusables/widgets/custom_app_bar.dart';
-import 'package:musica/reusables/widgets/my_collections_widget.dart';
-import 'package:musica/screens/drawer/drawer_all_screens/my_collection/collection_details_page.dart';
+import 'package:musica/musica/domain/entities/riverpod_file.dart';
+import 'package:musica/musica/presentation/pages/screens/drawer/drawer_all_screens/my_collection/collection_details_page.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/custom_app_bar.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/my_collections_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MyCollections extends StatefulWidget {
@@ -31,7 +31,8 @@ class _MyCollectionsState extends State<MyCollections> {
     final Color inactiveColor = textColor;
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar:const PreferredSize( preferredSize: Size.fromHeight(50), child: CustomAppBar()),
+      appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50), child: CustomAppBar()),
       body: ListView(
         children: [
           addVerticalSpacing(20),
@@ -99,7 +100,7 @@ class _MyCollectionsState extends State<MyCollections> {
                     return ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount:musicPlayerProvider.albumListX.length,
+                      itemCount: musicPlayerProvider.albumListX.length,
                       itemBuilder: (context, index) {
                         return Center(
                           child: MyCollectionsCard(
@@ -108,17 +109,24 @@ class _MyCollectionsState extends State<MyCollections> {
                                   context,
                                   PageTransition(
                                       child: CollectionDetailsPage(
-                                      title: musicPlayerProvider.albumListX[index].title,
-                                      artistName: musicPlayerProvider.albumListX[index].artistName,
-                                      fans: musicPlayerProvider.albumListX[index].fans,
-                                      imageUrl: musicPlayerProvider.albumListX[index].imageUrl,
-                                      trackList:musicPlayerProvider.albumListX[index].trackList,
+                                        title: musicPlayerProvider
+                                            .albumListX[index].title,
+                                        artistName: musicPlayerProvider
+                                            .albumListX[index].artistName,
+                                        fans: musicPlayerProvider
+                                            .albumListX[index].fans,
+                                        imageUrl: musicPlayerProvider
+                                            .albumListX[index].imageUrl,
+                                        trackList: musicPlayerProvider
+                                            .albumListX[index].trackList,
                                       ),
                                       type: PageTransitionType.rightToLeft));
                             },
-                            imageUrl: musicPlayerProvider.albumListX[index].imageUrl,
+                            imageUrl:
+                                musicPlayerProvider.albumListX[index].imageUrl,
                             title: musicPlayerProvider.albumListX[index].title,
-                            artistName: musicPlayerProvider.albumListX[index].artistName,
+                            artistName: musicPlayerProvider
+                                .albumListX[index].artistName,
                             fans: musicPlayerProvider.albumListX[index].fans,
                           ),
                         );

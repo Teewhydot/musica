@@ -2,16 +2,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/reusables/constants.dart';
-
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
 
 class TopClassWidget extends StatelessWidget {
- final title;
+  final title;
   final artistName;
   final image;
   final time;
 
-  const TopClassWidget({super.key, required this.title, required this.artistName, required this.image, required this.time});
+  const TopClassWidget(
+      {super.key,
+      required this.title,
+      required this.artistName,
+      required this.image,
+      required this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +37,29 @@ class TopClassWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(image,height: 99,width: 108,fit: BoxFit.fill,),
-                  Image.asset(Assets.imagesHeartTopClass,height: 37,width: 37,),
+                  Image.asset(
+                    image,
+                    height: 99,
+                    width: 108,
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    Assets.imagesHeartTopClass,
+                    height: 37,
+                    width: 37,
+                  ),
                 ],
               ),
               addVerticalSpacing(20),
-              Text(title,style: smallWhiteTextStyle.copyWith(fontSize: 17),),
+              Text(
+                title,
+                style: smallWhiteTextStyle.copyWith(fontSize: 17),
+              ),
               addVerticalSpacing(10),
-              Text(artistName,style: smallWhiteTextStyle.copyWith(color: textColor)),
+              Text(artistName,
+                  style: smallWhiteTextStyle.copyWith(color: textColor)),
               addVerticalSpacing(30),
-              Text(time,style: smallWhiteTextStyle),
-
+              Text(time, style: smallWhiteTextStyle),
             ],
           ),
         ),

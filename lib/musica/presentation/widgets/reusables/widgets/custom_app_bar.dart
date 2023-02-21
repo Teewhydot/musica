@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/reusables/constants.dart';
-
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);

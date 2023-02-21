@@ -1,14 +1,13 @@
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:musica/models/album_model.dart';
-import 'package:musica/models/music_model.dart';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:musica/musica/domain/entities/album_model.dart';
+import 'package:musica/musica/domain/entities/music_model.dart';
 
-
-
-class MusicPlayerProvider extends ChangeNotifier{
+class MusicPlayerProvider extends ChangeNotifier {
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Duration position = const Duration(seconds: 0);
@@ -38,20 +37,17 @@ class MusicPlayerProvider extends ChangeNotifier{
             noOfTracks: noOfTracks,
           );
           musicList.add(music);
-          print(noOfTracks);
         }
-
       } else {}
-    } catch(e){
-      print(e);
+    } catch (e) {
+      throw Exception();
     }
-
   }
 
   Future getPlayList() async {
-
     try {
-      http.Response response1 = await http.get(Uri.parse('https://api.deezer.com/user/2529/playlists'));
+      http.Response response1 = await http
+          .get(Uri.parse('https://api.deezer.com/user/2529/playlists'));
       if (response1.statusCode == 200) {
         var response = await jsonDecode(response1.body);
         var listOfPlayLists = response['data'];
@@ -70,10 +66,9 @@ class MusicPlayerProvider extends ChangeNotifier{
           albumList.add(album);
         }
       } else {}
-    } catch(e){
-
+    } catch (e) {
+      throw Exception();
     }
-
   }
 
   void playNextMusic(int index) async {
@@ -86,18 +81,19 @@ class MusicPlayerProvider extends ChangeNotifier{
   }
 
   bool get isPlayingMusic => isPlaying;
-  void playMusic(String url)async{
+  void playMusic(String url) async {
     await audioPlayer.play(UrlSource(url));
     isPlaying = true;
     notifyListeners();
   }
-  void pauseMusic()async{
+
+  void pauseMusic() async {
     await audioPlayer.pause();
     isPlaying = false;
     notifyListeners();
   }
 
-  void resumeMusic()async{
+  void resumeMusic() async {
     await audioPlayer.resume();
     isPlaying = true;
     notifyListeners();

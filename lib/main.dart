@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
-import 'package:musica/models/riverpod_file.dart';
+import 'package:musica/musica/domain/entities/riverpod_file.dart';
+import 'package:musica/musica/presentation/pages/screens/home.dart';
 import 'package:provider/provider.dart';
-import 'screens/home.dart';
 
 void main() {
   runApp(MultiProvider(

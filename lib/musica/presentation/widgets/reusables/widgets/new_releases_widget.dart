@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:musica/models/new_releases_model.dart';
+import 'package:musica/musica/domain/entities/new_releases_model.dart';
 
 class NewReleasesWidget extends StatelessWidget {
   final String image;
 
   const NewReleasesWidget({super.key, required this.image});
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +19,6 @@ class NewReleasesWidget extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class ReleasesWidget extends StatelessWidget {
   const ReleasesWidget({

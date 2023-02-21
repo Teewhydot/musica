@@ -2,16 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
 
 class MyCollectionsCard extends StatelessWidget {
- final onTap;
- final imageUrl;
- final title;
+  final onTap;
+  final imageUrl;
+  final title;
   final artistName;
   final fans;
 
-  const MyCollectionsCard({super.key, required this.onTap,required this.imageUrl,required this.title,required this.artistName,required this.fans});
+  const MyCollectionsCard(
+      {super.key,
+      required this.onTap,
+      required this.imageUrl,
+      required this.title,
+      required this.artistName,
+      required this.fans});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,7 @@ class MyCollectionsCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(20),
-              image:  DecorationImage(
+              image: DecorationImage(
                 image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
@@ -41,7 +47,6 @@ class MyCollectionsCard extends StatelessWidget {
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-
                     Colors.transparent.withOpacity(0.7),
                     Colors.transparent,
                   ],
@@ -72,7 +77,7 @@ class MyCollectionsCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-           Positioned(
+          Positioned(
             top: 190,
             left: 10,
             child: Text(

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/models/new_releases_model.dart';
-import 'package:musica/models/top_class_widget_model.dart';
-import 'package:musica/reusables/constants.dart';
-import 'package:musica/reusables/widgets/custom_app_bar.dart';
-import 'package:musica/reusables/widgets/large_home_card.dart';
-import 'package:musica/reusables/widgets/top_class_widget.dart';
-import 'package:musica/reusables/widgets/new_releases_widget.dart';
-import 'package:musica/screens/drawer/drawer_screen.dart';
+import 'package:musica/musica/domain/entities/new_releases_model.dart';
+import 'package:musica/musica/domain/entities/top_class_widget_model.dart';
+import 'package:musica/musica/presentation/pages/screens/drawer/drawer_screen.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/custom_app_bar.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/large_home_card.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/new_releases_widget.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/top_class_widget.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -16,7 +17,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
- 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -24,7 +24,8 @@ class _HomeState extends State<Home> {
       drawer: NavigationDrawer(),
       backgroundColor: backgroundColor,
       // bottomNavigationBar: GlassPlayerCard(),
-      appBar: PreferredSize( preferredSize: Size.fromHeight(50), child: CustomAppBar()),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50), child: CustomAppBar()),
       body: HomeBody(),
     );
   }
@@ -37,7 +38,6 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List<NewReleasesModel> newReleasesModelList = [
       NewReleasesModel(Assets.imagesRectangle1),
       NewReleasesModel(Assets.imagesRectangle1),
@@ -90,9 +90,7 @@ class HomeBody extends StatelessWidget {
     return ListView(
       children: [
         addVerticalSpacing(20),
-        GestureDetector(onTap: (){
-
-        }, child: const LargeHomeCardWidget()),
+        GestureDetector(onTap: () {}, child: const LargeHomeCardWidget()),
         addVerticalSpacing(20),
         Padding(
           padding: const EdgeInsets.all(8.0),

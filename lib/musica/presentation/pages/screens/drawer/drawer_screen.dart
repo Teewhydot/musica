@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/reusables/constants.dart';
-import 'package:musica/screens/drawer/drawer_all_screens/my_collection/my_collections.dart';
+import 'package:musica/musica/presentation/pages/screens/drawer/drawer_all_screens/my_collection/my_collections.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
 import 'package:page_transition/page_transition.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -45,7 +45,11 @@ class NavigationDrawer extends StatelessWidget {
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
                     ontap: () {
-                      Navigator.push(context, PageTransition(child: const MyCollections(), type: PageTransitionType.rightToLeft));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              child: const MyCollections(),
+                              type: PageTransitionType.rightToLeft));
                     },
                   ),
                   addVerticalSpacing(30),
@@ -73,7 +77,6 @@ class NavigationDrawer extends StatelessWidget {
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
                     ontap: () {},
-
                   ),
                   addVerticalSpacing(30),
                   DrawerItem(
@@ -88,7 +91,6 @@ class NavigationDrawer extends StatelessWidget {
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
                     ontap: () {},
-
                   ),
                   addVerticalSpacing(30),
                   DrawerItem(
@@ -104,7 +106,6 @@ class NavigationDrawer extends StatelessWidget {
                     midSpacing: addHorizontalSpacing(15),
                     ontap: () {},
                   ),
-
                 ],
               ),
             ),
@@ -120,7 +121,13 @@ class DrawerItem extends StatelessWidget {
   final Widget midSpacing;
   final ontap;
 
-  const DrawerItem({Key? key, required this.image, required this.text, required this.preSpacing, required this.midSpacing,required this.ontap})
+  const DrawerItem(
+      {Key? key,
+      required this.image,
+      required this.text,
+      required this.preSpacing,
+      required this.midSpacing,
+      required this.ontap})
       : super(key: key);
 
   @override

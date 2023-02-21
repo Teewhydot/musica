@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:musica/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
 
 class MusicCardWidget extends StatelessWidget {
   final String name;
   final String artist;
   final int duration;
   final String trackLink;
-  final  onPress;
+  final onPress;
 
-  const MusicCardWidget({super.key, required this.name, required this.artist,required this.duration,required this.trackLink,   required this.onPress});
+  const MusicCardWidget(
+      {super.key,
+      required this.name,
+      required this.artist,
+      required this.duration,
+      required this.trackLink,
+      required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     const height = 70.0;
     return Padding(
-      padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: GestureDetector(
         onTap: onPress,
         child: Container(
@@ -39,7 +45,8 @@ class MusicCardWidget extends StatelessWidget {
                             child: Text(
                               name,
                               softWrap: false,
-                              style:mediumWhiteTextStyle.copyWith(fontSize: 20),
+                              style:
+                                  mediumWhiteTextStyle.copyWith(fontSize: 20),
                             ),
                           ),
                           addVerticalSpacing(5),
@@ -69,10 +76,9 @@ class MusicCardWidget extends StatelessWidget {
                       size: 30,
                     ),
                   ),
-                   Text(duration.toString()),
+                  Text(duration.toString()),
                 ],
               ),
-
             ],
           ),
         ),

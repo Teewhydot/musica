@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/models/riverpod_file.dart';
-import 'package:musica/reusables/constants.dart';
-import 'package:musica/reusables/widgets/glassmorphism.dart';
+import 'package:musica/musica/domain/entities/riverpod_file.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/glassmorphism.dart';
 import 'package:provider/provider.dart';
 
 class GlassPlayerCard extends StatelessWidget {
@@ -39,9 +39,8 @@ class GlassPlayerCard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: textColor,width: 2)
-                          ),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: textColor, width: 2)),
                           height: 60,
                           width: 60,
                           child: Image.network(
@@ -61,8 +60,8 @@ class GlassPlayerCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: mediumWhiteTextStyle),
                         Text(musicArtist,
-                            style: smallWhiteTextStyle.copyWith(
-                                color: textColor)),
+                            style:
+                                smallWhiteTextStyle.copyWith(color: textColor)),
                       ],
                     ),
                   ),
@@ -73,15 +72,15 @@ class GlassPlayerCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
-                    onTap:() {
+                    onTap: () {
                       musicPlayerProvider.pauseMusic();
-                      },
+                    },
                     child: Icon(Icons.pause, color: textColor)),
                 addHorizontalSpacing(10),
                 GestureDetector(
-                    onTap: (){
-                 musicPlayerProvider.resumeMusic();
-                      },
+                    onTap: () {
+                      musicPlayerProvider.resumeMusic();
+                    },
                     child: Image.asset(Assets.iconsPlaymusic)),
                 addHorizontalSpacing(10),
                 Icon(Icons.skip_next, color: textColor),

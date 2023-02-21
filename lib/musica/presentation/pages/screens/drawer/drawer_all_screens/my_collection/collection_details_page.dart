@@ -1,11 +1,11 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/models/riverpod_file.dart';
-import 'package:musica/reusables/constants.dart';
-import 'package:musica/reusables/widgets/custom_app_bar.dart';
-import 'package:musica/reusables/widgets/glass_player_card.dart';
-import 'package:musica/reusables/widgets/music_card_widget.dart';
+import 'package:musica/musica/domain/entities/riverpod_file.dart';
+import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/custom_app_bar.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/glass_player_card.dart';
+import 'package:musica/musica/presentation/widgets/reusables/widgets/music_card_widget.dart';
 import 'package:provider/provider.dart';
 
 class CollectionDetailsPage extends StatefulWidget {
@@ -200,20 +200,24 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                             itemBuilder: (context, index) {
                               return MusicCardWidget(
                                 name: musicPlayerProvider.musicList[index].name,
-                                artist: musicPlayerProvider.musicList[index].artist,
-                                duration:
-                                    musicPlayerProvider.musicList[index].duration,
-                                trackLink: musicPlayerProvider.musicList[index].link,
+                                artist:
+                                    musicPlayerProvider.musicList[index].artist,
+                                duration: musicPlayerProvider
+                                    .musicList[index].duration,
+                                trackLink:
+                                    musicPlayerProvider.musicList[index].link,
                                 onPress: () {
-                                  musicProvider.playMusic(
-                                      musicPlayerProvider.musicList[index].link);
+                                  musicProvider.playMusic(musicPlayerProvider
+                                      .musicList[index].link);
                                   setState(() {
                                     currentPlayingMusicArtist =
-                                        musicPlayerProvider.musicList[index].artist;
+                                        musicPlayerProvider
+                                            .musicList[index].artist;
                                     currentPlayingMusicTitle =
-                                        musicPlayerProvider.musicList[index].name;
-                                    currentTrackLink =
-                                        musicPlayerProvider.musicList[index].link;
+                                        musicPlayerProvider
+                                            .musicList[index].name;
+                                    currentTrackLink = musicPlayerProvider
+                                        .musicList[index].link;
                                   });
                                 },
                               );
