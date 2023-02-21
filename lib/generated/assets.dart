@@ -13,7 +13,8 @@ class Assets {
   static const String iconsLogouticon = 'assets/icons/logouticon.png';
   static const String iconsMusicicon = 'assets/icons/musicicon.png';
   static const String iconsMusicvideos = 'assets/icons/musicvideos.png';
-  static const String iconsMyCollectionsPlayIcon = 'assets/icons/myCollectionsPlayIcon.png';
+  static const String iconsMyCollectionsPlayIcon =
+      'assets/icons/myCollectionsPlayIcon.png';
   static const String iconsMycollections = 'assets/icons/mycollections.png';
   static const String iconsPlayAllIcon = 'assets/icons/playAllIcon.png';
   static const String iconsPlaymusic = 'assets/icons/playmusic.png';
@@ -34,6 +35,10 @@ class Assets {
   static const String imagesRectangle09 = 'assets/images/rectangle09.png';
   static const String imagesRectangle1 = 'assets/images/Rectangle1.png';
   static const String imagesRectangle14 = 'assets/images/Rectangle14.png';
-  static const String imagesSampleCollection = 'assets/images/sampleCollection.png';
-
+  static const String imagesSampleCollection =
+      'assets/images/sampleCollection.png';
+  static const String lottieAnimationsLike =
+      'assets/lottie_animations/like.json';
+  static const String lottieAnimationsLikeAnimationTwo =
+      'assets/lottie_animations/like_animation_two.json';
 }

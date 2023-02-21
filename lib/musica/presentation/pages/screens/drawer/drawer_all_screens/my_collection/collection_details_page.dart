@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/animated_like_button.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glass_player_card.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/music_card_widget.dart';
@@ -157,11 +158,11 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                               height: 36,
                             )),
                             addHorizontalSpacing(5),
-                            Expanded(
-                                child: Image.asset(
-                              Assets.iconsLikeIcon,
-                              height: 36,
-                            )),
+                            const Expanded(
+                                child: AnimatedLikeButton(
+                                    text: "Like",
+                                    animationPath:
+                                        Assets.lottieAnimationsLike)),
                           ],
                         ),
                       ),

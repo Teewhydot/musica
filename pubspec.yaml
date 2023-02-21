@@ -15,6 +15,7 @@ dependencies:
   http: ^0.13.5
   audioplayers: ^1.1.1
   provider: ^6.0.4
+  lottie: ^2.2.0
 
 
 dev_dependencies:
@@ -28,3 +29,4 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/lottie_animations/
