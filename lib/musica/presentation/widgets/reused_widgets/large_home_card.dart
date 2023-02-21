@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
 
 class LargeHomeCardWidget extends StatelessWidget {
   const LargeHomeCardWidget({

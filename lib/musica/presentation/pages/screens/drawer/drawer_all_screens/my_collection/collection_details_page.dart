@@ -2,10 +2,10 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/custom_app_bar.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/glass_player_card.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/music_card_widget.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/glass_player_card.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/music_card_widget.dart';
 import 'package:provider/provider.dart';
 
 class CollectionDetailsPage extends StatefulWidget {
@@ -206,7 +206,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                                     .musicList[index].duration,
                                 trackLink:
                                     musicPlayerProvider.musicList[index].link,
-                                onPress: () {
+                                onTapped: () {
                                   musicProvider.playMusic(musicPlayerProvider
                                       .musicList[index].link);
                                   setState(() {

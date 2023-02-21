@@ -3,11 +3,11 @@ import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/new_releases_model.dart';
 import 'package:musica/musica/domain/entities/top_class_widget_model.dart';
 import 'package:musica/musica/presentation/pages/screens/drawer/drawer_screen.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/custom_app_bar.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/large_home_card.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/new_releases_widget.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/top_class_widget.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/large_home_card.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/new_releases_widget.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/top_class_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

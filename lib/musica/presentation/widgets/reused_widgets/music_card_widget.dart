@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
 
 class MusicCardWidget extends StatelessWidget {
   final String name;
   final String artist;
   final int duration;
   final String trackLink;
-  final onPress;
+  final onTapped;
 
   const MusicCardWidget(
       {super.key,
@@ -14,7 +14,7 @@ class MusicCardWidget extends StatelessWidget {
       required this.artist,
       required this.duration,
       required this.trackLink,
-      required this.onPress});
+      required this.onTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class MusicCardWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: GestureDetector(
-        onTap: onPress,
+        onTap: onTapped,
         child: Container(
           width: width,
           height: height,

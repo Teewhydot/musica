@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/presentation/pages/screens/drawer/drawer_all_screens/my_collection/my_collections.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:page_transition/page_transition.dart';
 
 class NavigationDrawer extends StatelessWidget {

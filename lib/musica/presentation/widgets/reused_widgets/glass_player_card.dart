@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/glassmorphism.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/glassmorphism.dart';
 import 'package:provider/provider.dart';
 
 class GlassPlayerCard extends StatelessWidget {

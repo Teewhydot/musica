@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
 import 'package:musica/musica/presentation/pages/screens/drawer/drawer_all_screens/my_collection/collection_details_page.dart';
-import 'package:musica/musica/presentation/widgets/reusables/constants.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/custom_app_bar.dart';
-import 'package:musica/musica/presentation/widgets/reusables/widgets/my_collections_widget.dart';
+import 'package:musica/musica/presentation/widgets/constants.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/my_collections_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MyCollections extends StatefulWidget {
