@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:musica/generated/assets.dart';
-import 'package:musica/musica/domain/entities/new_releases_model.dart';
-import 'package:musica/musica/domain/entities/top_class_widget_model.dart';
+import 'package:musica/musica/domain/mock_files/mock_albums/new_releases_album.dart';
+import 'package:musica/musica/domain/mock_files/mock_albums/top_charts_album.dart';
 import 'package:musica/musica/presentation/pages/screens/drawer/drawer_screen.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
@@ -38,55 +37,6 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<NewReleasesModel> newReleasesModelList = [
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-      NewReleasesModel(Assets.imagesRectangle1),
-    ];
-    List<TopClassWidgetModel> topClassWidgetList = [
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-      TopClassWidgetModel(
-          title: 'Golden age of 80\'s',
-          artistName: 'Sean Swadder',
-          image: Assets.imagesPlaylistImage,
-          time: '1:24:98'),
-    ];
     return ListView(
       children: [
         addVerticalSpacing(20),
@@ -104,13 +54,13 @@ class HomeBody extends StatelessWidget {
           height: 250,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: topClassWidgetList.length,
+              itemCount: getTopChartsList().length,
               itemBuilder: (context, index) {
                 return TopClassWidget(
-                  image: topClassWidgetList[index].image,
-                  title: topClassWidgetList[index].time,
-                  artistName: topClassWidgetList[index].artistName,
-                  time: topClassWidgetList[index].time,
+                  image: getTopChartsList()[index].image,
+                  title: getTopChartsList()[index].time,
+                  artistName: getTopChartsList()[index].artistName,
+                  time: getTopChartsList()[index].time,
                 );
               }),
         ),
@@ -121,7 +71,7 @@ class HomeBody extends StatelessWidget {
             style: boldWhiteTextStyle.copyWith(fontSize: 24),
           ),
         ),
-        ReleasesWidget(newReleasesModelList: newReleasesModelList),
+        ReleasesWidget(newReleasesModelList: newReleasesList()),
         addVerticalSpacing(100),
       ],
     );

@@ -1,10 +1,10 @@
-class TopClassWidgetModel {
+class TopChartsWidgetModel {
   final String title;
   final String artistName;
   final String image;
   final String time;
 
-  TopClassWidgetModel(
+  TopChartsWidgetModel(
       {required this.title,
       required this.artistName,
       required this.image,

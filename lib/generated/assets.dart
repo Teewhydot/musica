@@ -2,7 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String assetsNarutoSound = 'assets/narutoSound.mp3';
   static const String iconsAddToCollecIcon = 'assets/icons/addToCollecIcon.png';
   static const String iconsAddtocollection = 'assets/icons/addtocollection.png';
   static const String iconsHeartIcon = 'assets/icons/heartIcon.png';

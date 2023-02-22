@@ -9,11 +9,12 @@ class LargeHomeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 503,
-        width: 367,
+        width: size.width,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
           image: DecorationImage(
@@ -31,7 +32,7 @@ class LargeHomeCardWidget extends StatelessWidget {
                 'Curated Playlist',
                 style: mediumWhiteTextStyle,
               ),
-              addVerticalSpacing(236),
+              addVerticalSpacing(136),
               const Text(
                 'R & B  Hits',
                 style: boldWhiteTextStyle,
@@ -42,77 +43,11 @@ class LargeHomeCardWidget extends StatelessWidget {
                 style: smallWhiteTextStyle.copyWith(fontSize: 14),
               ),
               addVerticalSpacing(40),
+              const OverlapingImagesWidget(),
+              addVerticalSpacing(20),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: const [
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundColor: Colors.white,
-                      ),
-                      Positioned(
-                        left: 25,
-                        child: CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.red,
-                        ),
-                      ),
-                      Positioned(
-                        left: 50,
-                        child: CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.green,
-                        ),
-                      ),
-                      Positioned(
-                        left: 75,
-                        child: CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.blue,
-                        ),
-                      ),
-                      Positioned(
-                        left: 100,
-                        child: CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.yellow,
-                        ),
-                      ),
-
-                      // Container(
-                      //   height: 50,
-                      //   width: 50,
-                      //   decoration: const BoxDecoration(
-                      //     borderRadius:
-                      //         BorderRadius.all(Radius.circular(20)),
-                      //     image: DecorationImage(
-                      //       image: AssetImage(Assets.imagesPlaylistImage),
-                      //       fit: BoxFit.cover,
-                      //     ),
-                      //   ),
-                      // ),
-                      // Positioned(
-                      //   top: 0,
-                      //   right: 0,
-                      //   child: Container(
-                      //     height: 20,
-                      //     width: 20,
-                      //     decoration: const BoxDecoration(
-                      //       color: Colors.white,
-                      //       borderRadius:
-                      //           BorderRadius.all(Radius.circular(20)),
-                      //     ),
-                      //     child: const Icon(
-                      //       Icons.play_arrow,
-                      //       color: Colors.black,
-                      //       size: 15,
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                  addHorizontalSpacing(140),
                   Image.asset(
                     Assets.iconsHeartIcon,
                     height: 36,
@@ -131,6 +66,84 @@ class LargeHomeCardWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class OverlapingImagesWidget extends StatelessWidget {
+  const OverlapingImagesWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: const [
+        CircleAvatar(
+          radius: 18,
+          backgroundColor: Colors.white,
+        ),
+        Positioned(
+          left: 20,
+          child: CircleAvatar(
+            radius: 18,
+            backgroundColor: Colors.red,
+          ),
+        ),
+        Positioned(
+          left: 40,
+          child: CircleAvatar(
+            radius: 18,
+            backgroundColor: Colors.green,
+          ),
+        ),
+        Positioned(
+          left: 60,
+          child: CircleAvatar(
+            radius: 18,
+            backgroundColor: Colors.blue,
+          ),
+        ),
+        Positioned(
+          left: 80,
+          child: CircleAvatar(
+            radius: 18,
+            backgroundColor: Colors.yellow,
+          ),
+        ),
+
+        // Container(
+        //   height: 50,
+        //   width: 50,
+        //   decoration: const BoxDecoration(
+        //     borderRadius:
+        //         BorderRadius.all(Radius.circular(20)),
+        //     image: DecorationImage(
+        //       image: AssetImage(Assets.imagesPlaylistImage),
+        //       fit: BoxFit.cover,
+        //     ),
+        //   ),
+        // ),
+        // Positioned(
+        //   top: 0,
+        //   right: 0,
+        //   child: Container(
+        //     height: 20,
+        //     width: 20,
+        //     decoration: const BoxDecoration(
+        //       color: Colors.white,
+        //       borderRadius:
+        //           BorderRadius.all(Radius.circular(20)),
+        //     ),
+        //     child: const Icon(
+        //       Icons.play_arrow,
+        //       color: Colors.black,
+        //       size: 15,
+        //     ),
+        //   ),
+        // ),
+      ],
     );
   }
 }
