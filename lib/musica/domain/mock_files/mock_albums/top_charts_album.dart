@@ -6,37 +6,47 @@ List<TopChartsWidgetModel> getTopChartsList() {
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle1,
         time: '1:24:98'),
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle02,
         time: '1:24:98'),
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle03,
         time: '1:24:98'),
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle04,
         time: '1:24:98'),
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle05,
         time: '1:24:98'),
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle06,
         time: '1:24:98'),
     TopChartsWidgetModel(
         title: 'Golden age of 80\'s',
         artistName: 'Sean Swadder',
-        image: Assets.imagesPlaylistImage,
+        image: Assets.imagesRectangle07,
+        time: '1:24:98'),
+    TopChartsWidgetModel(
+        title: 'Golden age of 80\'s',
+        artistName: 'Sean Swadder',
+        image: Assets.imagesRectangle08,
+        time: '1:24:98'),
+    TopChartsWidgetModel(
+        title: 'Golden age of 80\'s',
+        artistName: 'Sean Swadder',
+        image: Assets.imagesRectangle09,
         time: '1:24:98'),
   ];
   return list;

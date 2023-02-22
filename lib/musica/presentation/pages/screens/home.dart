@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
       extendBody: true,
       drawer: NavigationDrawer(),
       backgroundColor: backgroundColor,
-      // bottomNavigationBar: GlassPlayerCard(),
+      //   bottomNavigationBar: GlassPlayerCard(),
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(50), child: CustomAppBar()),
       body: HomeBody(),
