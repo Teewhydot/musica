@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/presentation/pages/screens/drawer/drawer_all_screens/my_collection/my_collections.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
+import 'package:musica/musica/presentation/widgets/reused_widgets/drawer_item.dart';
 import 'package:page_transition/page_transition.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -29,7 +30,7 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'Home',
                     preSpacing: addHorizontalSpacing(5),
                     midSpacing: addHorizontalSpacing(10),
-                    ontap: () {
+                    onTapped: () {
                       Navigator.pop(context);
                     },
                   ),
@@ -44,7 +45,7 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'My collections',
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
-                    ontap: () {
+                    onTapped: () {
                       Navigator.push(
                           context,
                           PageTransition(
@@ -63,7 +64,7 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'Radio',
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
-                    ontap: () {},
+                    onTapped: () {},
                   ),
                   addVerticalSpacing(30),
                   DrawerItem(
@@ -76,7 +77,7 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'Music Videos',
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
-                    ontap: () {},
+                    onTapped: () {},
                   ),
                   addVerticalSpacing(30),
                   DrawerItem(
@@ -90,7 +91,7 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'Profile',
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
-                    ontap: () {},
+                    onTapped: () {},
                   ),
                   addVerticalSpacing(30),
                   DrawerItem(
@@ -104,7 +105,7 @@ class NavigationDrawer extends StatelessWidget {
                     text: 'Log out',
                     preSpacing: addHorizontalSpacing(12),
                     midSpacing: addHorizontalSpacing(15),
-                    ontap: () {},
+                    onTapped: () {},
                   ),
                 ],
               ),
@@ -112,45 +113,4 @@ class NavigationDrawer extends StatelessWidget {
           ],
         ),
       );
-}
-
-class DrawerItem extends StatelessWidget {
-  final Widget image;
-  final String text;
-  final Widget preSpacing;
-  final Widget midSpacing;
-  final ontap;
-
-  const DrawerItem(
-      {Key? key,
-      required this.image,
-      required this.text,
-      required this.preSpacing,
-      required this.midSpacing,
-      required this.ontap})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: ontap,
-      child: Container(
-        height: 50,
-        width: 400,
-        color: backgroundColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            preSpacing,
-            image,
-            midSpacing,
-            Text(
-              text,
-              style: mediumWhiteTextStyle,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

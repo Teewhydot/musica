@@ -1,13 +1,26 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
+import 'package:musica/musica/presentation/manager/music_control_bloc.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/animated_like_button.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glass_player_card.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/music_card_widget.dart';
 import 'package:provider/provider.dart';
+
+class CollectionDetailsWrapper extends StatelessWidget {
+  const CollectionDetailsWrapper({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => MusicControlBloc(),
+    );
+  }
+}
 
 class CollectionDetailsPage extends StatefulWidget {
   final String imageUrl;
