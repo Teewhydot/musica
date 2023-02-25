@@ -12,12 +12,15 @@ import 'package:musica/musica/presentation/widgets/reused_widgets/music_card_wid
 import 'package:provider/provider.dart';
 
 class CollectionDetailsWrapper extends StatelessWidget {
-  const CollectionDetailsWrapper({Key? key}) : super(key: key);
+  final Widget child;
+  const CollectionDetailsWrapper({required this.child, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MusicControlBloc(),
+      child: child,
     );
   }
 }

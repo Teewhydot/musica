@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:musica/musica/domain/entities/riverpod_file.dart';
 import 'package:musica/musica/presentation/manager/music_control_bloc.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glassmorphism.dart';
-import 'package:provider/provider.dart';
 
 class GlassPlayerCard extends StatelessWidget {
   final String currentPlayingMusicTitle;
@@ -24,7 +22,7 @@ class GlassPlayerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final musicBloc = BlocProvider.of<MusicControlBloc>(context);
-    final musicPlayerProvider = Provider.of<MusicPlayerProvider>(context);
+    // final musicPlayerProvider = Provider.of<MusicPlayerProvider>(context);
     return GlassMorphicContainer(
         500.0,
         100.0,
@@ -75,13 +73,13 @@ class GlassPlayerCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // GestureDetector(
-                //     onTap: () {
-                //       musicPlayerProvider.pauseMusic();
-                //     },
-                //     child: I
-                //     con(Icons.pause, color: textColor)),
                 addHorizontalSpacing(10),
+                Icon(
+                  Icons.skip_previous,
+                  color: textColor,
+                  size: 35,
+                ),
+                addHorizontalSpacing(20),
                 BlocBuilder<MusicControlBloc, MusicControlState>(
                     builder: (context, state) {
                   if (state is MusicControlInitialState) {
@@ -89,30 +87,34 @@ class GlassPlayerCard extends StatelessWidget {
                         onTap: () {
                           musicBloc.add(MusicControlPlayEvent());
                         },
-                        child: Icon(Icons.play_arrow, color: textColor));
+                        child:
+                            Icon(Icons.play_arrow, color: textColor, size: 35));
                   } else if (state is MusicControlLoadingState) {
                     return const Center(
-                      child: CircularProgressIndicator(
-                        color: kDefaultIconDarkColor,
-                        value: 0.5,
-                        strokeWidth: 2,
-                        key: Key('musicLoading'),
+                      child: SizedBox(
+                        height: 35,
+                        width: 35,
+                        child: CircularProgressIndicator(
+                          color: kDefaultIconDarkColor,
+                        ),
                       ),
                     );
                   } else if (state is MusicControlPlayingState) {
                     return GestureDetector(
                         onTap: () {
-                          musicBloc.add(MusicControlPlayEvent());
+                          musicBloc.add(MusicControlPauseEvent());
                         },
-                        child: Icon(Icons.pause, color: textColor));
+                        child: Icon(Icons.pause, color: textColor, size: 35));
                   } else {
                     return Container();
                   }
                 }),
-                addHorizontalSpacing(10),
-                Icon(Icons.skip_previous, color: textColor),
                 addHorizontalSpacing(20),
-                Icon(Icons.skip_next, color: textColor),
+                Icon(
+                  Icons.skip_next,
+                  color: textColor,
+                  size: 35,
+                ),
                 addHorizontalSpacing(50),
               ],
             ),

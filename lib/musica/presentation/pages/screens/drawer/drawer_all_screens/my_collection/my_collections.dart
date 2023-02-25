@@ -108,17 +108,19 @@ class _MyCollectionsState extends State<MyCollections> {
                               Navigator.push(
                                   context,
                                   PageTransition(
-                                      child: CollectionDetailsPage(
-                                        title: musicPlayerProvider
-                                            .albumListX[index].title,
-                                        artistName: musicPlayerProvider
-                                            .albumListX[index].artistName,
-                                        fans: musicPlayerProvider
-                                            .albumListX[index].fans,
-                                        imageUrl: musicPlayerProvider
-                                            .albumListX[index].imageUrl,
-                                        trackList: musicPlayerProvider
-                                            .albumListX[index].trackList,
+                                      child: CollectionDetailsWrapper(
+                                        child: CollectionDetailsPage(
+                                          title: musicPlayerProvider
+                                              .albumListX[index].title,
+                                          artistName: musicPlayerProvider
+                                              .albumListX[index].artistName,
+                                          fans: musicPlayerProvider
+                                              .albumListX[index].fans,
+                                          imageUrl: musicPlayerProvider
+                                              .albumListX[index].imageUrl,
+                                          trackList: musicPlayerProvider
+                                              .albumListX[index].trackList,
+                                        ),
                                       ),
                                       type: PageTransitionType.rightToLeft));
                             },
