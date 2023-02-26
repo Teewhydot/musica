@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musica/musica/presentation/manager/music_control_bloc.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glassmorphism.dart';
+import 'package:toast/toast.dart';
 
 class GlassPlayerCard extends StatelessWidget {
   final String currentPlayingMusicTitle;
@@ -21,6 +22,7 @@ class GlassPlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     final musicBloc = BlocProvider.of<MusicControlBloc>(context);
     // final musicPlayerProvider = Provider.of<MusicPlayerProvider>(context);
     return GlassMorphicContainer(
@@ -105,6 +107,20 @@ class GlassPlayerCard extends StatelessWidget {
                           musicBloc.add(MusicControlPauseEvent());
                         },
                         child: Icon(Icons.pause, color: textColor, size: 35));
+                  } else if (state is MusicControlFailedState) {
+                    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Could\'nt play music'),
+                        duration: Duration(seconds: 2),
+                        backgroundColor: Colors.grey,
+                      ));
+                    });
+                    return GestureDetector(
+                        onTap: () {
+                          musicBloc.add(MusicControlPlayEvent());
+                        },
+                        child: Icon(Icons.replay_circle_filled,
+                            color: textColor, size: 35));
                   } else {
                     return Container();
                   }
