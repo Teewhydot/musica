@@ -81,6 +81,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final musicBloc = BlocProvider.of<MusicControlBloc>(context);
     final musicProvider =
         Provider.of<MusicPlayerProvider>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
@@ -89,6 +90,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
         imageLink: widget.imageUrl,
         currentPlayingMusicTitle: currentPlayingMusicTitle,
         musicArtist: currentPlayingMusicArtist,
+        currentTrackLink: currentTrackLink,
       ),
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -224,8 +226,9 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                                 trackLink:
                                     musicPlayerProvider.musicList[index].link,
                                 onTapped: () {
-                                  musicProvider.playMusic(musicPlayerProvider
-                                      .musicList[index].link);
+                                  musicBloc.add(MusicControlPlayEvent(
+                                      trackLink: musicPlayerProvider
+                                          .musicList[index].link));
                                   setState(() {
                                     currentPlayingMusicArtist =
                                         musicPlayerProvider

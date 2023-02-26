@@ -2,21 +2,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:musica/musica/domain/entities/riverpod_file.dart';
 import 'package:musica/musica/presentation/manager/music_control_bloc.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glassmorphism.dart';
+import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
 class GlassPlayerCard extends StatelessWidget {
   final String currentPlayingMusicTitle;
   final String musicArtist;
   final String imageLink;
+  final String currentTrackLink;
   final MusicControlBloc? musicControlBloc;
 
   GlassPlayerCard(
       {required this.currentPlayingMusicTitle,
       required this.musicArtist,
       required this.imageLink,
+      required this.currentTrackLink,
       this.musicControlBloc})
       : super(key: UniqueKey());
 
@@ -24,7 +28,8 @@ class GlassPlayerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ToastContext().init(context);
     final musicBloc = BlocProvider.of<MusicControlBloc>(context);
-    // final musicPlayerProvider = Provider.of<MusicPlayerProvider>(context);
+    final musicPlayerProvider =
+        Provider.of<MusicPlayerProvider>(context, listen: false);
     return GlassMorphicContainer(
         500.0,
         100.0,
@@ -87,7 +92,8 @@ class GlassPlayerCard extends StatelessWidget {
                   if (state is MusicControlInitialState) {
                     return GestureDetector(
                         onTap: () {
-                          musicBloc.add(MusicControlPlayEvent());
+                          musicBloc.add(MusicControlPlayEvent(
+                              trackLink: currentTrackLink));
                         },
                         child:
                             Icon(Icons.play_arrow, color: textColor, size: 35));
@@ -103,7 +109,7 @@ class GlassPlayerCard extends StatelessWidget {
                     );
                   } else if (state is MusicControlPlayingState) {
                     return GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           musicBloc.add(MusicControlPauseEvent());
                         },
                         child: Icon(Icons.pause, color: textColor, size: 35));
@@ -117,7 +123,8 @@ class GlassPlayerCard extends StatelessWidget {
                     });
                     return GestureDetector(
                         onTap: () {
-                          musicBloc.add(MusicControlPlayEvent());
+                          musicBloc.add(MusicControlPlayEvent(
+                              trackLink: currentTrackLink));
                         },
                         child: Icon(Icons.replay_circle_filled,
                             color: textColor, size: 35));

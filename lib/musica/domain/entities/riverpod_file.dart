@@ -16,11 +16,22 @@ class MusicPlayerProvider extends ChangeNotifier {
   List<Album> albumList = [];
   List<Music> get musixList => musicList;
   List<Album> get albumListX => albumList;
+
+  fromjson(dynamic jsonResponse) {
+    final data = jsonResponse['data'];
+
+    for (final albumData in data) {
+      final album = Album.fromJson(albumData);
+      albumList.add(album);
+    }
+    notifyListeners();
+  }
+
   Future getTrackList(String apiLink) async {
     try {
-      http.Response response1 = await http.get(Uri.parse(apiLink));
-      if (response1.statusCode == 200) {
-        var res1 = await jsonDecode(response1.body);
+      http.Response trackListResponse = await http.get(Uri.parse(apiLink));
+      if (trackListResponse.statusCode == 200) {
+        var res1 = await jsonDecode(trackListResponse.body);
         var res2 = res1['data'];
         for (var data in res2) {
           var trackName = data['title'];
@@ -46,25 +57,11 @@ class MusicPlayerProvider extends ChangeNotifier {
 
   Future getPlayList() async {
     try {
-      http.Response response1 = await http
+      http.Response playListResponse = await http
           .get(Uri.parse('https://api.deezer.com/user/2529/playlists'));
-      if (response1.statusCode == 200) {
-        var response = await jsonDecode(response1.body);
-        var listOfPlayLists = response['data'];
-        for (var data in listOfPlayLists) {
-          var playListName = data['title'];
-          var creator = data['creator']['name'];
-          var noOfFans = data['id'];
-          var trackList = data['tracklist'];
-          var coverImage = data['picture_big'];
-          final Album album = Album(
-              trackList: trackList,
-              title: playListName,
-              fans: noOfFans,
-              artistName: creator,
-              imageUrl: coverImage);
-          albumList.add(album);
-        }
+      if (playListResponse.statusCode == 200) {
+        var response = await jsonDecode(playListResponse.body);
+        fromjson(response);
       } else {}
     } catch (e) {
       throw Exception();

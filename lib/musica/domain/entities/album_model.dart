@@ -1,4 +1,3 @@
-
 class Album {
   final String imageUrl;
   final String title;
@@ -6,12 +5,21 @@ class Album {
   final int fans;
   final String trackList;
 
-  Album(
-      {required this.imageUrl,
-      required this.title,
-      required this.artistName,
-        required this.trackList,
-        required this.fans});
+  Album({
+    required this.imageUrl,
+    required this.title,
+    required this.artistName,
+    required this.fans,
+    required this.trackList,
+  });
 
-
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      imageUrl: json['picture_big'],
+      title: json['title'],
+      artistName: json['creator']['name'],
+      fans: json['id'],
+      trackList: json['tracklist'],
+    );
+  }
 }
