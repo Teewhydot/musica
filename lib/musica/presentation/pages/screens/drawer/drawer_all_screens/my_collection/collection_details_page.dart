@@ -1,28 +1,12 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
-import 'package:musica/musica/presentation/manager/music_control_bloc.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/animated_like_button.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glass_player_card.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/music_card_widget.dart';
-
-class CollectionDetailsWrapper extends StatelessWidget {
-  final Widget child;
-  const CollectionDetailsWrapper({required this.child, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MusicControlBloc(),
-      child: child,
-    );
-  }
-}
 
 class CollectionDetailsPage extends StatefulWidget {
   final String imageUrl;
@@ -80,7 +64,6 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final musicBloc = BlocProvider.of<MusicControlBloc>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar: GlassPlayerCard(
@@ -223,9 +206,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                                 trackLink:
                                     musicPlayerProvider.musicList[index].link,
                                 onTapped: () {
-                                  musicBloc.add(MusicControlPlayEvent(
-                                      trackLink: musicPlayerProvider
-                                          .musicList[index].link));
+                                  // implement play functionality
                                   setState(() {
                                     currentPlayingMusicArtist =
                                         musicPlayerProvider
