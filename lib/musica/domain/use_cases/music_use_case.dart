@@ -4,15 +4,17 @@ import 'package:musica/musica/domain/entities/music_entity.dart';
 import 'package:musica/musica/domain/failures/failures.dart';
 
 class PlayMusicUseCase {
-  final MusicControlImplementation musicControl = MusicControlImplementation();
+  final PlayMusicControlImplementation musicControl =
+      PlayMusicControlImplementation();
   Future<Either<Failure, MusicEntity>> playMusic(String url) async {
     return musicControl.playMusic(url);
   }
 }
 
 class PauseMusicUseCase {
-  final MusicControlImplementation musicControl = MusicControlImplementation();
+  final PauseMusicControlImplementation pauseMusicControl =
+      PauseMusicControlImplementation();
   Future pauseMusic() async {
-    return musicControl.pauseMusic();
+    return pauseMusicControl.pauseMusic();
   }
 }

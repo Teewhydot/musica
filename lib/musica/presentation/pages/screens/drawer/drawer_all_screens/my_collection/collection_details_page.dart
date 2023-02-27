@@ -9,7 +9,6 @@ import 'package:musica/musica/presentation/widgets/reused_widgets/animated_like_
 import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glass_player_card.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/music_card_widget.dart';
-import 'package:provider/provider.dart';
 
 class CollectionDetailsWrapper extends StatelessWidget {
   final Widget child;
@@ -82,8 +81,6 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final musicBloc = BlocProvider.of<MusicControlBloc>(context);
-    final musicProvider =
-        Provider.of<MusicPlayerProvider>(context, listen: false);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       bottomNavigationBar: GlassPlayerCard(

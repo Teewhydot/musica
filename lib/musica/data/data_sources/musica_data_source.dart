@@ -8,8 +8,12 @@ abstract class MusicaDataSource {
   Future<MusicEntity> getMusicaFromDataSource();
 }
 
-abstract class MusicControlClass {
+abstract class MusicControlPlayMusic {
   void playMusic(String url);
+}
+
+abstract class MusicControlClassPauseMusic {
+  void pauseMusic();
 }
 
 class MusicaDataSourceImplementation implements MusicaDataSource {
@@ -20,7 +24,8 @@ class MusicaDataSourceImplementation implements MusicaDataSource {
   }
 }
 
-class MusicControlImplementation extends ChangeNotifier with MusicControlClass {
+class PlayMusicControlImplementation extends ChangeNotifier
+    with MusicControlPlayMusic {
   bool isPlaying = false;
   final audioPlayer = AudioPlayer();
   bool get isPlayingMusic => isPlaying;
@@ -37,15 +42,17 @@ class MusicControlImplementation extends ChangeNotifier with MusicControlClass {
     }
   }
 
-  Future pauseMusic() async {
-    await audioPlayer.pause();
-    isPlaying = false;
-    notifyListeners();
-  }
-
   void resumeMusic() async {
     await audioPlayer.resume();
     isPlaying = true;
     notifyListeners();
+  }
+}
+
+class PauseMusicControlImplementation implements MusicControlClassPauseMusic {
+  final audioPlayer = AudioPlayer();
+  @override
+  void pauseMusic() async {
+    await audioPlayer.pause();
   }
 }
