@@ -29,7 +29,7 @@ class CollectionDetailsPage extends StatefulWidget {
 }
 
 class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
-  MusicPlayerProvider musicPlayerProvider = MusicPlayerProvider();
+  MusicPlayerProvider musicProvider = MusicPlayerProvider();
   late Future trackListFuture;
   final audioPlayer = AudioPlayer();
   bool isPlaying = false;
@@ -42,7 +42,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   @override
   void initState() {
     super.initState();
-    trackListFuture = musicPlayerProvider.getTrackList(widget.trackList);
+    trackListFuture = musicProvider.getTrackList(widget.trackList);
     audioPlayer.onPlayerStateChanged.listen((event) {
       setState(() {
         isPlaying = event == PlayerState.playing;
@@ -194,28 +194,24 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                           return ListView.builder(
                             shrinkWrap: true,
                             physics: const ScrollPhysics(),
-                            itemCount: musicPlayerProvider.musicList.length,
+                            itemCount: musicProvider.musicList.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
                               return MusicCardWidget(
-                                name: musicPlayerProvider.musicList[index].name,
-                                artist:
-                                    musicPlayerProvider.musicList[index].artist,
-                                duration: musicPlayerProvider
-                                    .musicList[index].duration,
-                                trackLink:
-                                    musicPlayerProvider.musicList[index].link,
+                                name: musicProvider.musicList[index].name,
+                                artist: musicProvider.musicList[index].artist,
+                                duration:
+                                    musicProvider.musicList[index].duration,
+                                trackLink: musicProvider.musicList[index].link,
                                 onTapped: () {
                                   // implement play functionality
                                   setState(() {
                                     currentPlayingMusicArtist =
-                                        musicPlayerProvider
-                                            .musicList[index].artist;
+                                        musicProvider.musicList[index].artist;
                                     currentPlayingMusicTitle =
-                                        musicPlayerProvider
-                                            .musicList[index].name;
-                                    currentTrackLink = musicPlayerProvider
-                                        .musicList[index].link;
+                                        musicProvider.musicList[index].name;
+                                    currentTrackLink =
+                                        musicProvider.musicList[index].link;
                                   });
                                 },
                               );

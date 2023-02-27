@@ -16,12 +16,12 @@ class MyCollections extends StatefulWidget {
 
 class _MyCollectionsState extends State<MyCollections> {
   late Future albumFuture;
-  MusicPlayerProvider musicPlayerProvider = MusicPlayerProvider();
+  MusicPlayerProvider musicProvider = MusicPlayerProvider();
 
   @override
   void initState() {
     super.initState();
-    albumFuture = musicPlayerProvider.getPlayList();
+    albumFuture = musicProvider.getPlayList();
   }
 
   List<bool> isActive = [true, false];
@@ -100,7 +100,7 @@ class _MyCollectionsState extends State<MyCollections> {
                     return ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: musicPlayerProvider.albumListX.length,
+                      itemCount: musicProvider.albumListX.length,
                       itemBuilder: (context, index) {
                         return Center(
                           child: MyCollectionsCard(
@@ -109,25 +109,24 @@ class _MyCollectionsState extends State<MyCollections> {
                                   context,
                                   PageTransition(
                                       child: CollectionDetailsPage(
-                                        title: musicPlayerProvider
+                                        title: musicProvider
                                             .albumListX[index].title,
-                                        artistName: musicPlayerProvider
+                                        artistName: musicProvider
                                             .albumListX[index].artistName,
-                                        fans: musicPlayerProvider
+                                        fans: musicProvider
                                             .albumListX[index].fans,
-                                        imageUrl: musicPlayerProvider
+                                        imageUrl: musicProvider
                                             .albumListX[index].imageUrl,
-                                        trackList: musicPlayerProvider
+                                        trackList: musicProvider
                                             .albumListX[index].trackList,
                                       ),
                                       type: PageTransitionType.rightToLeft));
                             },
-                            imageUrl:
-                                musicPlayerProvider.albumListX[index].imageUrl,
-                            title: musicPlayerProvider.albumListX[index].title,
-                            artistName: musicPlayerProvider
-                                .albumListX[index].artistName,
-                            fans: musicPlayerProvider.albumListX[index].fans,
+                            imageUrl: musicProvider.albumListX[index].imageUrl,
+                            title: musicProvider.albumListX[index].title,
+                            artistName:
+                                musicProvider.albumListX[index].artistName,
+                            fans: musicProvider.albumListX[index].fans,
                           ),
                         );
                       },
