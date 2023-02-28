@@ -26,7 +26,6 @@ class GlassMorphicContainer extends StatelessWidget {
                 height: height,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.7),
-
                   border: Border.all(
                       color: Colors.white.withOpacity(0.1), width: 1),
                 ),
@@ -44,8 +43,8 @@ class GlassMorphicContainer extends StatelessWidget {
                     offset: const Offset(0, 0), // changes position of shadow
                   ),
                 ],
-                border: Border.all(
-                    color: Colors.white.withOpacity(0.1), width: 1),
+                border:
+                    Border.all(color: Colors.white.withOpacity(0.1), width: 1),
                 gradient: LinearGradient(
                   stops: const [0.0, 1.0],
                   begin: Alignment.topLeft,

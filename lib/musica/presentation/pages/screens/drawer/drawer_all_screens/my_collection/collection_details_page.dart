@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
@@ -31,7 +30,6 @@ class CollectionDetailsPage extends StatefulWidget {
 class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   MusicPlayerProvider musicProvider = MusicPlayerProvider();
   late Future trackListFuture;
-  final audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Duration position = const Duration(seconds: 0);
   Duration duration = const Duration(seconds: 0);
@@ -43,23 +41,23 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   void initState() {
     super.initState();
     trackListFuture = musicProvider.getTrackList(widget.trackList);
-    audioPlayer.onPlayerStateChanged.listen((event) {
-      setState(() {
-        isPlaying = event == PlayerState.playing;
-      });
-    });
-
-    audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
-    });
-
-    audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
-    });
+    // audioPlayer.onPlayerStateChanged.listen((event) {
+    //   setState(() {
+    //     isPlaying = event == PlayerState.playing;
+    //   });
+    // });
+    //
+    // audioPlayer.onDurationChanged.listen((newDuration) {
+    //   setState(() {
+    //     duration = newDuration;
+    //   });
+    // });
+    //
+    // audioPlayer.onPositionChanged.listen((newPosition) {
+    //   setState(() {
+    //     position = newPosition;
+    //   });
+    // });
   }
 
   @override
@@ -76,7 +74,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
       extendBody: true,
       appBar: const PreferredSize(
           preferredSize: Size.fromHeight(50), child: CustomAppBar()),
-      body: Column(
+      body: ListView(
         children: [
           Stack(clipBehavior: Clip.none, children: <Widget>[
             Container(
@@ -221,7 +219,7 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                   )
                 ],
               ),
-            )
+            ),
           ]),
         ],
       ),

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +7,6 @@ import 'package:musica/musica/domain/entities/album_model.dart';
 import 'package:musica/musica/domain/entities/music_model.dart';
 
 class MusicPlayerProvider extends ChangeNotifier {
-  final audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Duration position = const Duration(seconds: 0);
   Duration duration = const Duration(seconds: 0);
@@ -68,31 +66,31 @@ class MusicPlayerProvider extends ChangeNotifier {
     }
   }
 
-  void playNextMusic(int index) async {
-    if (index < musicList.length - 1) {
-      index++;
-      await audioPlayer.play(UrlSource(musicList[index].link));
-    } else {
-      await audioPlayer.play(UrlSource(musicList[0].link));
-    }
-  }
+  // void playNextMusic(int index) async {
+  //   if (index < musicList.length - 1) {
+  //     index++;
+  //     await audioPlayer.play(UrlSource(musicList[index].link));
+  //   } else {
+  //     await audioPlayer.play(UrlSource(musicList[0].link));
+  //   }
+  // }
 
   bool get isPlayingMusic => isPlaying;
-  void playMusic(String url) async {
-    await audioPlayer.play(UrlSource(url));
-    isPlaying = true;
-    notifyListeners();
-  }
+  // void playMusic(String url) async {
+  //   await audioPlayer.play(UrlSource(url));
+  //   isPlaying = true;
+  //   notifyListeners();
+  // }
 
-  void pauseMusic() async {
-    await audioPlayer.pause();
-    isPlaying = false;
-    notifyListeners();
-  }
+  // void pauseMusic() async {
+  //   await audioPlayer.pause();
+  //   isPlaying = false;
+  //   notifyListeners();
+  // }
 
-  void resumeMusic() async {
-    await audioPlayer.resume();
-    isPlaying = true;
-    notifyListeners();
-  }
+  // void resumeMusic() async {
+  //   await audioPlayer.resume();
+  //   isPlaying = true;
+  //   notifyListeners();
+  // }
 }
