@@ -66,31 +66,5 @@ class MusicPlayerProvider extends ChangeNotifier {
     }
   }
 
-  // void playNextMusic(int index) async {
-  //   if (index < musicList.length - 1) {
-  //     index++;
-  //     await audioPlayer.play(UrlSource(musicList[index].link));
-  //   } else {
-  //     await audioPlayer.play(UrlSource(musicList[0].link));
-  //   }
-  // }
-
   bool get isPlayingMusic => isPlaying;
-  // void playMusic(String url) async {
-  //   await audioPlayer.play(UrlSource(url));
-  //   isPlaying = true;
-  //   notifyListeners();
-  // }
-
-  // void pauseMusic() async {
-  //   await audioPlayer.pause();
-  //   isPlaying = false;
-  //   notifyListeners();
-  // }
-
-  // void resumeMusic() async {
-  //   await audioPlayer.resume();
-  //   isPlaying = true;
-  //   notifyListeners();
-  // }
 }

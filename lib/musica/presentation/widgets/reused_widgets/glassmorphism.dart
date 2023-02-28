@@ -25,7 +25,7 @@ class GlassMorphicContainer extends StatelessWidget {
                 width: width,
                 height: height,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.7),
+                  color: Colors.black.withOpacity(1),
                   border: Border.all(
                       color: Colors.white.withOpacity(0.1), width: 1),
                 ),

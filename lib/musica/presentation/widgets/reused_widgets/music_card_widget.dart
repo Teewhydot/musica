@@ -21,7 +21,7 @@ class MusicCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    const height = 70.0;
+    const height = 100.0;
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: GestureDetector(
@@ -33,55 +33,58 @@ class MusicCardWidget extends StatelessWidget {
             color: backgroundColor,
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              name,
-                              softWrap: false,
-                              style:
-                                  mediumWhiteTextStyle.copyWith(fontSize: 20),
-                            ),
-                          ),
-                          addVerticalSpacing(5),
-                          Expanded(
-                            child: Text(
-                              artist,
-                              style: TextStyle(
-                                color: textColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10, top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                name,
+                                softWrap: false,
+                                style:
+                                    mediumWhiteTextStyle.copyWith(fontSize: 20),
                               ),
                             ),
-                          ),
-                        ],
+                            addVerticalSpacing(5),
+                            Expanded(
+                              child: Text(
+                                artist,
+                                style: TextStyle(
+                                  color: textColor,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.more_vert,
+                        color: textColor,
+                        size: 30,
                       ),
                     ),
+                    Text(duration.toString()),
                   ],
                 ),
-              ),
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.more_vert,
-                      color: textColor,
-                      size: 30,
-                    ),
-                  ),
-                  Text(duration.toString()),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

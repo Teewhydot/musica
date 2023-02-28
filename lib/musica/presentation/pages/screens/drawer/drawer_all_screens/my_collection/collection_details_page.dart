@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:musica/generated/assets.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
@@ -28,11 +29,9 @@ class CollectionDetailsPage extends StatefulWidget {
 }
 
 class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
+  late final AudioPlayer audioPlayer;
   MusicPlayerProvider musicProvider = MusicPlayerProvider();
   late Future trackListFuture;
-  bool isPlaying = false;
-  Duration position = const Duration(seconds: 0);
-  Duration duration = const Duration(seconds: 0);
   String currentPlayingMusicTitle = '';
   String currentPlayingMusicArtist = '';
   String currentTrackLink = '';
@@ -41,35 +40,12 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
   void initState() {
     super.initState();
     trackListFuture = musicProvider.getTrackList(widget.trackList);
-    // audioPlayer.onPlayerStateChanged.listen((event) {
-    //   setState(() {
-    //     isPlaying = event == PlayerState.playing;
-    //   });
-    // });
-    //
-    // audioPlayer.onDurationChanged.listen((newDuration) {
-    //   setState(() {
-    //     duration = newDuration;
-    //   });
-    // });
-    //
-    // audioPlayer.onPositionChanged.listen((newPosition) {
-    //   setState(() {
-    //     position = newPosition;
-    //   });
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      bottomNavigationBar: GlassPlayerCard(
-        imageLink: widget.imageUrl,
-        currentPlayingMusicTitle: currentPlayingMusicTitle,
-        musicArtist: currentPlayingMusicArtist,
-        currentTrackLink: currentTrackLink,
-      ),
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: const PreferredSize(
@@ -162,152 +138,61 @@ class _CollectionDetailsPageState extends State<CollectionDetailsPage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: height - 510,
-                  child: FutureBuilder(
-                      future: trackListFuture,
-                      initialData: const Center(
+                FutureBuilder(
+                    future: trackListFuture,
+                    initialData: const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.white,
+                      backgroundColor: Colors.white,
+                    )),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Center(
+                            child: Text(
+                          'Something went wrong',
+                          style: mediumWhiteTextStyle,
+                        ));
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
                           child: CircularProgressIndicator(
-                        color: Colors.white,
-                        backgroundColor: Colors.white,
-                      )),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return const Center(
-                              child: Text(
-                            'Something went wrong',
-                            style: mediumWhiteTextStyle,
-                          ));
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              color: textColor,
-                            ),
-                          );
-                        }
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: musicProvider.musicList.length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return MusicCardWidget(
-                              name: musicProvider.musicList[index].name,
-                              artist: musicProvider.musicList[index].artist,
-                              duration: musicProvider.musicList[index].duration,
-                              trackLink: musicProvider.musicList[index].link,
-                              onTapped: () {
-                                // implement play functionality
-                                setState(() {
-                                  currentPlayingMusicArtist =
-                                      musicProvider.musicList[index].artist;
-                                  currentPlayingMusicTitle =
-                                      musicProvider.musicList[index].name;
-                                  currentTrackLink =
-                                      musicProvider.musicList[index].link;
-                                });
-                              },
-                            );
-                          },
+                            color: textColor,
+                          ),
                         );
-                      }),
-                )
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: musicProvider.musicList.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return MusicCardWidget(
+                            name: musicProvider.musicList[index].name,
+                            artist: musicProvider.musicList[index].artist,
+                            duration: musicProvider.musicList[index].duration,
+                            trackLink: musicProvider.musicList[index].link,
+                            onTapped: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return GlassPlayerCard(
+                                    currentPlayingMusicTitle:
+                                        musicProvider.musicList[index].name,
+                                    musicArtist:
+                                        musicProvider.musicList[index].artist,
+                                    imageLink: widget.imageUrl,
+                                    currentTrackLink:
+                                        musicProvider.musicList[index].link);
+                              }));
+                            },
+                          );
+                        },
+                      );
+                    })
               ],
             ),
           ),
           addVerticalSpacing(200)
         ]),
-      ),
-    );
-  }
-}
-
-class CollectionDetailsPag extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  final String artistName;
-  final int fans;
-  final String trackList;
-
-  const CollectionDetailsPag(
-      {super.key,
-      required this.imageUrl,
-      required this.title,
-      required this.artistName,
-      required this.fans,
-      required this.trackList});
-
-  @override
-  State<CollectionDetailsPag> createState() => _CollectionDetailsPagState();
-}
-
-class _CollectionDetailsPagState extends State<CollectionDetailsPag> {
-  MusicPlayerProvider musicProvider = MusicPlayerProvider();
-  late Future trackListFuture;
-  bool isPlaying = false;
-  Duration position = const Duration(seconds: 0);
-  Duration duration = const Duration(seconds: 0);
-  String currentPlayingMusicTitle = '';
-  String currentPlayingMusicArtist = '';
-  String currentTrackLink = '';
-
-  @override
-  void initState() {
-    super.initState();
-    trackListFuture = musicProvider.getTrackList(widget.trackList);
-    // audioPlayer.onPlayerStateChanged.listen((event) {
-    //   setState(() {
-    //     isPlaying = event == PlayerState.playing;
-    //   });
-    // });
-    //
-    // audioPlayer.onDurationChanged.listen((newDuration) {
-    //   setState(() {
-    //     duration = newDuration;
-    //   });
-    // });
-    //
-    // audioPlayer.onPositionChanged.listen((newPosition) {
-    //   setState(() {
-    //     position = newPosition;
-    //   });
-    // });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height / 2,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.imageUrl),
-                fit: BoxFit.cover,
-              ),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.5),
-                  Colors.black.withOpacity(0.8),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-          ListView.builder(
-            itemCount: 10, // replace with the actual number of items
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text('Item $index'),
-              );
-            },
-          ),
-        ],
       ),
     );
   }
