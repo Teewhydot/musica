@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musica/musica/domain/entities/riverpod_file.dart';
-import 'package:musica/musica/presentation/pages/screens/drawer/drawer_all_screens/my_collection/my_collections.dart';
+import 'package:musica/musica/presentation/pages/screens/home.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyCollections(),
+      home: Home(),
     );
   }
 }

@@ -77,9 +77,9 @@ class OverlapingImagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return const Stack(
       clipBehavior: Clip.none,
-      children: const [
+      children: [
         CircleAvatar(
           radius: 18,
           backgroundColor: Colors.white,

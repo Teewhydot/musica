@@ -4,12 +4,10 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:musica/musica/domain/entities/position_data.dart';
-import 'package:musica/musica/domain/entities/riverpod_file.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/controls.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/custom_app_bar.dart';
 import 'package:musica/musica/presentation/widgets/reused_widgets/glassmorphism.dart';
-import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:toast/toast.dart';
 
@@ -63,8 +61,6 @@ class _GlassPlayerCardState extends State<GlassPlayerCard> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     ToastContext().init(context);
-    final musicPlayerProvider =
-        Provider.of<MusicPlayerProvider>(context, listen: false);
     return Scaffold(
       appBar: const PreferredSize(
           preferredSize: Size.fromHeight(50), child: CustomAppBar()),

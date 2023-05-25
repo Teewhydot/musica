@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return const Scaffold(
       extendBody: true,
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawerScreen(),
       backgroundColor: backgroundColor,
       //   bottomNavigationBar: GlassPlayerCard(),
       appBar: PreferredSize(
