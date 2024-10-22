@@ -11,13 +11,12 @@ class DrawerItem extends StatelessWidget {
   final onTapped;
 
   const DrawerItem(
-      {Key? key,
+      {super.key,
       required this.image,
       required this.text,
       required this.preSpacing,
       required this.midSpacing,
-      required this.onTapped})
-      : super(key: key);
+      required this.onTapped});
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,7 @@ class Controls extends StatelessWidget {
               margin: const EdgeInsets.all(8.0),
               width: 32.0,
               height: 32.0,
-              child: const CircularProgressIndicator(
+              child:  CircularProgressIndicator(
                 color: kDefaultIconDarkColor,
               ),
             );

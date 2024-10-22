@@ -8,7 +8,7 @@ import 'package:musica/musica/presentation/widgets/reused_widgets/drawer_item.da
 import 'package:page_transition/page_transition.dart';
 
 class NavigationDrawerScreen extends StatelessWidget {
-  const NavigationDrawerScreen({Key? key}) : super(key: key);
+  const NavigationDrawerScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Drawer(

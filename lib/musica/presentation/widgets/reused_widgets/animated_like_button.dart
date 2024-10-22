@@ -172,8 +172,6 @@
 //   }
 // }
 
-/// lottie file custom animation
-///
 // import 'package:flutter/material.dart';
 // import 'package:lottie/lottie.dart';
 //
@@ -268,7 +266,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 // lottie file custom animation with flutter animation code removed
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show AnimationController, BuildContext, Colors, GestureDetector, MainAxisSize, Row, SizedBox, State, StatefulWidget, Text, TextStyle, TickerProviderStateMixin, Widget;
 import 'package:lottie/lottie.dart';
 import 'package:musica/musica/presentation/widgets/constants.dart';
 
@@ -277,10 +275,10 @@ class AnimatedLikeButton extends StatefulWidget {
   final String animationPath;
 
   const AnimatedLikeButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.animationPath,
-  }) : super(key: key);
+  });
 
   @override
   _AnimatedLikeButtonState createState() => _AnimatedLikeButtonState();

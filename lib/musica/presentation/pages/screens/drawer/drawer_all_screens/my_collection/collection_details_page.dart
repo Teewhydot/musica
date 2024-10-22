@@ -16,13 +16,12 @@ class CollectionDetailsPage extends StatefulWidget {
   final String trackList;
 
   const CollectionDetailsPage(
-      {Key? key,
+      {super.key,
       required this.imageUrl,
       required this.title,
       required this.artistName,
       required this.fans,
-      required this.trackList})
-      : super(key: key);
+      required this.trackList});
 
   @override
   State<CollectionDetailsPage> createState() => _CollectionDetailsPageState();

@@ -4,8 +4,8 @@ import 'package:musica/musica/presentation/widgets/constants.dart';
 
 class LargeHomeCardWidget extends StatelessWidget {
   const LargeHomeCardWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

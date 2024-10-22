@@ -8,7 +8,7 @@ import 'package:musica/musica/presentation/widgets/reused_widgets/my_collections
 import 'package:page_transition/page_transition.dart';
 
 class MyCollections extends StatefulWidget {
-  const MyCollections({Key? key}) : super(key: key);
+  const MyCollections({super.key});
 
   @override
   State<MyCollections> createState() => _MyCollectionsState();
@@ -144,10 +144,10 @@ class RowOption extends StatelessWidget {
   final color;
 
   const RowOption({
-    Key? key,
+    super.key,
     required this.text,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

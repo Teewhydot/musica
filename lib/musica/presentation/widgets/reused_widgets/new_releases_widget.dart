@@ -22,9 +22,9 @@ class NewReleasesWidget extends StatelessWidget {
 
 class ReleasesWidget extends StatelessWidget {
   const ReleasesWidget({
-    Key? key,
+    super.key,
     required this.newReleasesModelList,
-  }) : super(key: key);
+  });
 
   final List<NewReleasesModel> newReleasesModelList;
 

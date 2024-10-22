@@ -12,22 +12,22 @@ dependencies:
   flutter_screenutil: ^5.5.4
   toast: ^0.3.0
   page_transition: "^2.0.9"
-  http: ^0.13.5
+  http: ^1.2.2
   provider: ^6.0.4
-  lottie: ^2.2.0
+  lottie: ^3.1.3
   flutter_bloc: ^8.1.2
   dartz: ^0.10.1
   just_audio: ^0.9.31
   just_audio_background: ^0.0.1-beta.9
   cached_network_image: ^3.2.3
-  audio_video_progress_bar: ^1.0.0
-  rxdart: ^0.27.7
+  audio_video_progress_bar: ^2.0.3
+  rxdart: ^0.28.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true

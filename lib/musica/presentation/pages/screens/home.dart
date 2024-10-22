@@ -9,7 +9,7 @@ import 'package:musica/musica/presentation/widgets/reused_widgets/new_releases_w
 import 'package:musica/musica/presentation/widgets/reused_widgets/top_class_widget.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -32,8 +32,8 @@ class _HomeState extends State<Home> {
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
